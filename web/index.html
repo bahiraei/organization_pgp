@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="اپ سازمانی هدایت کشتی خلیج فارس">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="PGP">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png?v=1">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png?v=1"/>
+
+  <title>اپ سازمانی هدایت کشتی خلیج فارس</title>
+  <link rel="manifest" href="manifest.json?v=1">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = null;
+
+    </script>
+  <script type="text/javascript">
+  var userAgent = window.navigator.userAgent,
+      platform = window.navigator?.userAgentData?.platform || window.navigator.platform,
+      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+      os = null;
+
+  if (macosPlatforms.indexOf(platform) !== -1) {
+    os = 'Mac OS';
+  } else if (iosPlatforms.indexOf(platform) !== -1) {
+    os = 'iOS';
+  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+    os = 'Windows';
+  } else if (/Android/.test(userAgent)) {
+    os = 'Android';
+  } else if (/Linux/.test(platform)) {
+    os = 'Linux';
+  } else {
+    os = 'Android';
+  }
+    if(os == 'iOS') {
+      window.flutterWebRenderer = "html";
+    } else {
+      window.flutterWebRenderer = "canvaskit";
+    }
+
+    </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js?v=1" defer></script>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/build/pdf.js"
+        type="text/javascript"></script>
+<script type="text/javascript">
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/build/pdf.worker.min.js";
+    pdfRenderOptions = {
+      cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/cmaps/',
+      cMapPacked: true,
+    }
+
+</script>
+
+<div id="loading">
+  <style>
+      body {
+        inset: 0; overflow: hidden;
+        margin: 0; padding: 0;
+        position: fixed;
+      }
+      #loading {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+      }
+      #loading img {
+        animation: 1s ease-in-out 0s infinite alternate breathe;
+        opacity: .66;
+        transition: opacity .4s;
+      }
+      #loading.main_done img {
+        opacity: 1;
+      }
+      #loading.init_done img {
+        animation: .33s ease-in-out 0s 1 forwards zooooom;
+        opacity: .05;
+      }
+      @keyframes breathe { from { transform: scale(1) } to { transform: scale(0.95)}}
+      @keyframes zooooom { from { transform: scale(1) } to { transform: scale(10)}}
+
+
+
+    </style>
+  <img src="/icons/Icon-192.png?v=1" alt="Loading indicator..."/>
+</div>
+  <script>
+    window.addEventListener('load', function(ev) {
+      var loading = document.querySelector('#loading');
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        entrypointUrl: "main.dart.js?v=" + serviceWorkerVersion,
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          loading.classList.add('main_done');
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            loading.classList.add('init_done');
+            appRunner.runApp();
+            // Wait a few milliseconds so users can see the "zoom" animation
+            // before getting rid of the "loading" div.
+            window.setTimeout(function() {
+              loading.remove();
+            }, 200);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

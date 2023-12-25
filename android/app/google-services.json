@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "487002396898",
+    "project_id": "hedayatpgp",
+    "storage_bucket": "hedayatpgp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487002396898:android:97c8279780233ff52ba6bb",
+        "android_client_info": {
+          "package_name": "ir.pgpilotco.organization_pgp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADqfzbLAZUcWCMrE133ZjvZqUvsTJj4GU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
