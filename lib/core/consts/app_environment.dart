@@ -1,5 +1,5 @@
 class AppEnvironment {
-  static const String baseUrl = "https://api.bipc.ir/";
+  static const String baseUrl = "https://hedayatapi.abiports.com/";
   static const String fileDownloadBaseUrl = "${baseUrl}ImgServer/";
   static const String sliderBaseUrl = "${baseUrl}Slider/";
   static const String mediaBaseUrl = "${baseUrl}imgserver/";

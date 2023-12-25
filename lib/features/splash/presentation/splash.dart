@@ -108,7 +108,6 @@ class _SplashScreenState extends State<SplashScreen>
             );
           } else if (state is SplashError) {
             if (state.exception is UnauthorizedException) {
-              await Future.delayed(const Duration(seconds: 5));
               await authRepository.signOut().then(
                 (value) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
@@ -117,6 +116,8 @@ class _SplashScreenState extends State<SplashScreen>
                   );
                 },
               );
+            } else {
+              await Future.delayed(const Duration(seconds: 5));
             }
           }
         },

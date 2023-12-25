@@ -212,7 +212,9 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   body: Builder(
                     builder: (context) {
-                      if (state.homeData.data?.happyBirthdayMessage != null) {
+                      if (state.homeData.data?.happyBirthdayMessage != null &&
+                          state.homeData.data?.happyBirthdayMessage?.message !=
+                              null) {
                         final userSeenBirthdayCount = state.homeData.data
                             ?.happyBirthdayMessage!.userInfo!.countReaded!;
                         final showBirthdayCount = state.homeData.data
