@@ -238,22 +238,32 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
 
                           if (state is PhoneLoading) {
                             return const Center(
-                              child: SizedBox(
-                                height: 32,
-                                width: 32,
-                                child: CircularProgressIndicator(),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 32,
+                                    width: 32,
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ],
                               ),
                             );
                           } else if (state is PhoneInitial) {
                             return const SizedBox();
                           } else if (state is PhoneEmpty) {
                             return const Center(
-                              child: Text(
-                                'اطلاعاتی یافت نشد',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'اطلاعاتی یافت نشد',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           } else if (state is PhoneError) {
