@@ -116,7 +116,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     onTap: () => widget.tabIndexNotifier.value = 1,
                   ),
                   CustomTabBar(
-                    title: 'هدایت کشتی',
+                    title: 'مانیتورینگ',
                     isShowLine: widget.tabIndexNotifier.value == 2,
                     onTap: () => widget.tabIndexNotifier.value = 2,
                     icon: Icons.star,

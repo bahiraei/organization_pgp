@@ -59,6 +59,16 @@ class MonitoringPage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),*/
+            HomeItems(
+              color: Colors.blue,
+              text: "زیر ساخت فاوا",
+              /*routeName: Routes.serverStatus,*/
+              onTap: () {},
+              child: const Icon(
+                Icons.local_laundry_service,
+                color: Colors.white,
+              ),
+            ),
             if (profile?.canAddMessage ?? false)
               const HomeItems(
                 color: Colors.orange,
