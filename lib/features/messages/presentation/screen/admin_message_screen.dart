@@ -850,16 +850,18 @@ class _AdminMessageScreenState extends State<AdminMessageScreen> {
                                               Expanded(
                                                 child: Row(
                                                   children: [
-                                                    Text(
-                                                      selectedImage!.name,
-                                                      style: const TextStyle(
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        color:
-                                                            Color(0xff0090FF),
-                                                        fontSize: 13,
+                                                    Flexible(
+                                                      child: Text(
+                                                        selectedImage!.name,
+                                                        style: const TextStyle(
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          color:
+                                                              Color(0xff0090FF),
+                                                          fontSize: 13,
+                                                        ),
+                                                        maxLines: 1,
                                                       ),
-                                                      maxLines: 1,
                                                     ),
                                                   ],
                                                 ),

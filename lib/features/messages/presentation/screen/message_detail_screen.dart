@@ -171,19 +171,27 @@ class _MessageDetailScreenState extends State<MessageDetailScreen>
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10),
-                                        child: Text(
-                                          widget.screenParams.multimediaEntity
-                                                  .fullText ??
-                                              '',
-                                          // textAlign: TextAlign.justify,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            height: 1.8,
-                                          ),
-                                        ).animate().fadeIn(
-                                              delay: const Duration(
-                                                  milliseconds: 300),
+                                        child: Row(
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                widget
+                                                        .screenParams
+                                                        .multimediaEntity
+                                                        .fullText ??
+                                                    '',
+                                                // textAlign: TextAlign.justify,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  height: 1.8,
+                                                ),
+                                              ).animate().fadeIn(
+                                                    delay: const Duration(
+                                                        milliseconds: 300),
+                                                  ),
                                             ),
+                                          ],
+                                        ),
                                       ),
                                       const SizedBox(height: 20),
                                       DefaultTabController(

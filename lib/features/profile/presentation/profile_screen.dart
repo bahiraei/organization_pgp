@@ -378,10 +378,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               color: Color(0xffe8e8e8),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'اداره',
                                   style: TextStyle(
                                     color: Color(0xff477fed),
@@ -390,8 +390,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 Text(
-                                  'پتروشیمی بندر امام',
-                                  style: TextStyle(
+                                  state.profile.data!.officeName ?? '-',
+                                  style: const TextStyle(
                                     color: Color(0xff3b3b3b),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,

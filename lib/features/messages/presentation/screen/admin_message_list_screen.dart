@@ -749,6 +749,7 @@ class _AdminMessageListItemState extends State<AdminMessageListItem> {
 
                               if (mounted) {
                                 if (result) {
+                                  Helper.log(widget.message.id);
                                   BlocProvider.of<MessageBloc>(context).add(
                                     MessageSendNotifStarted(
                                       messageId: widget.message.id,
