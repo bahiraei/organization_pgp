@@ -46,7 +46,7 @@ class FishDataSource with HttpResponseValidator implements IFishDataSource {
     required String month,
   }) async {
     final response = await http.post(
-      'api/Fish/GetFishPetroEmamPdf2',
+      'api/Fish/GetFish',
       data: {
         "year": year,
         "month": month,
@@ -55,6 +55,6 @@ class FishDataSource with HttpResponseValidator implements IFishDataSource {
 
     final validated = validateResponse(response);
 
-    return validated.data;
+    return validated.data['data'];
   }
 }
