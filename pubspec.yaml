@@ -97,6 +97,8 @@ flutter:
     - assets/images/home/
     - assets/images/birthday/
     - assets/images/profile/
+    - assets/images/calendar/
+    - assets/images/meeting/
 
 
   fonts:
