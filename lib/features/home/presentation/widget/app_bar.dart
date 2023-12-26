@@ -61,7 +61,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     offset: const Offset(-7, 8),
                     child: IconButton(
                       onPressed: () async {
-                        /*await Navigator.of(context).pushNamed(Routes.message);*/
+                        await Navigator.of(context).pushNamed(Routes.message);
 
                         BlocProvider.of<HomeBloc>(context)
                             .add(const HomeStarted(

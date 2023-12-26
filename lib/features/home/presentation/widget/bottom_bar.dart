@@ -206,7 +206,7 @@ class BottomBarWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 const Text(
-                  'هدایت کشتی',
+                  'مانیتورینگ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 13,
