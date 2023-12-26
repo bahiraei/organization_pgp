@@ -25,7 +25,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> animOffset;
   int? delay;
@@ -116,8 +116,6 @@ class _SplashScreenState extends State<SplashScreen>
                   );
                 },
               );
-            } else {
-              await Future.delayed(const Duration(seconds: 5));
             }
           }
         },

@@ -129,7 +129,7 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'L',
+                                    'E',
                                     style: TextStyle(
                                       color: Color(0xff4786ea),
                                       fontSize: 40,
@@ -137,7 +137,7 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                                     ),
                                   ),
                                   Text(
-                                    'E',
+                                    'T',
                                     style: TextStyle(
                                       color: Color(0xffda3337),
                                       fontSize: 40,
@@ -145,7 +145,7 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                                     ),
                                   ),
                                   Text(
-                                    'T',
+                                    'O',
                                     style: TextStyle(
                                       color: Color(0xff3bbb55),
                                       fontSize: 40,
@@ -153,7 +153,7 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                                     ),
                                   ),
                                   Text(
-                                    ' ',
+                                    'L',
                                     style: TextStyle(
                                       color: Colors.orange,
                                       fontSize: 40,
@@ -161,7 +161,7 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                                     ),
                                   ),
                                   Text(
-                                    'C',
+                                    'I',
                                     style: TextStyle(
                                       color: Color(0xff4786ea),
                                       fontSize: 40,
@@ -177,7 +177,15 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                                     ),
                                   ),
                                   Text(
-                                    'I',
+                                    ' ',
+                                    style: TextStyle(
+                                      color: Color(0xfff3c30b),
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'G',
                                     style: TextStyle(
                                       color: Color(0xffda3337),
                                       fontSize: 40,
@@ -185,7 +193,7 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                                     ),
                                   ),
                                   Text(
-                                    'B',
+                                    'P',
                                     style: TextStyle(
                                       color: Color(0xff4786ea),
                                       fontSize: 40,

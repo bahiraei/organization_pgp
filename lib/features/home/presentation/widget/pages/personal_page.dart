@@ -27,15 +27,6 @@ class PersonalPage extends StatelessWidget {
         spacing: 0,
         children: [
           HomeItems(
-            color: Colors.green,
-            text: "آخرین حکم",
-            routeName: Routes.hokm,
-            child: Icon(
-              Icons.list_alt,
-              color: Colors.white,
-            ),
-          ),
-          HomeItems(
             color: Colors.purple,
             text: "فیش",
             routeName: Routes.fish,
@@ -81,7 +72,7 @@ class PersonalPage extends StatelessWidget {
               color: Colors.white,
             ),
           ),*/
-          /*    const HomeItems(
+          HomeItems(
             color: Colors.blueGrey,
             text: "جلسات",
             routeName: Routes.meetings,
@@ -89,8 +80,8 @@ class PersonalPage extends StatelessWidget {
               Icons.group,
               color: Colors.white,
             ),
-          ),*/
-          /*    const HomeItems(
+          ),
+          HomeItems(
             color: Colors.indigo,
             text: "تقویم دیجیتال",
             routeName: Routes.calendar,
@@ -98,7 +89,7 @@ class PersonalPage extends StatelessWidget {
               Icons.calendar_month_rounded,
               color: Colors.white,
             ),
-          ),*/
+          ),
         ],
       ),
     );

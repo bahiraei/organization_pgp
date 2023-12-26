@@ -38,8 +38,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final tabIndexNotifier = ValueNotifier<int>(0);
   final showBirthdayNotifier = ValueNotifier<bool>(false);

@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import '../../features/auth/data/model/app_version.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/verify_screen.dart';
+import '../../features/calendar/peresentation/calendar_screen.dart';
 import '../../features/fish/presentation/fish_screen.dart';
-import '../../features/hokm/presentation/hokm_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
+import '../../features/meeting/data/model/meeting_model.dart';
+import '../../features/meeting/presentation/meeting_subscribers_screen.dart';
+import '../../features/meeting/presentation/meeting_titles_screen.dart';
+import '../../features/meeting/presentation/meetings_screen.dart';
 import '../../features/messages/presentation/screen/admin_edit_message_screen.dart';
 import '../../features/messages/presentation/screen/admin_message_detail_screen.dart';
 import '../../features/messages/presentation/screen/admin_message_list_screen.dart';
@@ -43,7 +47,10 @@ class Routes {
   static const String createMessageList = "/createMessageList";
   static const String createMessageDetailsList = "/createMessageDetailsList";
   static const String adminEditMessageScreen = "/adminEditMessageScreen";
-  static const String hokm = "/hokm";
+  static const String meetings = "/meetings";
+  static const String meetingTitles = "/meetingTitles";
+  static const String meetingSubscribers = "/meetingSubscribers";
+  static const String calendar = "/calendar";
 
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -144,9 +151,28 @@ class Routes {
           ),
         );
 
-      case hokm:
+      case meetings:
         return screenRouting(
-          const HokmScreen(),
+          const MeetingsScreen(),
+        );
+
+      case meetingTitles:
+        return screenRouting(
+          MeetingTitleScreen(
+            meeting: settings.arguments as MeetingModel,
+          ),
+        );
+
+      case meetingSubscribers:
+        return screenRouting(
+          MeetingSubscribersScreen(
+            meeting: settings.arguments as MeetingModel,
+          ),
+        );
+
+      case calendar:
+        return screenRouting(
+          const CalendarScreen(),
         );
 
       default:
