@@ -263,7 +263,7 @@ class DigitalCalendarDayItem extends StatelessWidget {
           onTap();
         },
         child: AnimatedContainer(
-          width: isSelected ? null : 115,
+          width: isSelected ? null : 120,
           padding: EdgeInsets.fromLTRB(
             isSelected ? 8 : 32,
             0,
@@ -407,7 +407,7 @@ class EventListItem extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(9),
         onTap: () {
-          /*  Navigator.of(context).pushNamed(Routes.event);*/
+          /* Navigator.of(context).pushNamed(Routes.event);*/
         },
         child: Container(
           padding: const EdgeInsets.symmetric(
@@ -578,28 +578,30 @@ class MeetingListItem extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Row(
-                          children: [
-                            const Flexible(
-                              child: Text(
-                                'ساعت : ',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
+                        Expanded(
+                          child: Row(
+                            children: [
+                              const Flexible(
+                                child: Text(
+                                  'ساعت : ',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                meeting.startTime,
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
+                              Flexible(
+                                child: Text(
+                                  meeting.startTime,
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  textDirection: TextDirection.ltr,
                                 ),
-                                textDirection: TextDirection.ltr,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
