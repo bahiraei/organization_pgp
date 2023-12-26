@@ -4,6 +4,9 @@ import '../../features/auth/data/model/app_version.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/verify_screen.dart';
 import '../../features/calendar/peresentation/calendar_screen.dart';
+import '../../features/feedback/presentation/apply_feedback_screen.dart';
+import '../../features/feedback/presentation/feedback_details_screen.dart';
+import '../../features/feedback/presentation/feedback_screen.dart';
 import '../../features/fish/presentation/fish_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/meeting/data/model/meeting_model.dart';
@@ -51,6 +54,9 @@ class Routes {
   static const String meetingTitles = "/meetingTitles";
   static const String meetingSubscribers = "/meetingSubscribers";
   static const String calendar = "/calendar";
+  static const String feedbacks = "/feedbacks";
+  static const String feedbackDetails = "/feedbackDetails";
+  static const String applyFeedback = "/applyFeedback";
 
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -173,6 +179,24 @@ class Routes {
       case calendar:
         return screenRouting(
           const CalendarScreen(),
+        );
+
+      case feedbacks:
+        return screenRouting(
+          FeedbackScreen(
+            screenParams: settings.arguments as FeedbackScreenParams,
+          ),
+        );
+
+      case feedbackDetails:
+        return screenRouting(
+          FeedbackDetailsScreen(
+            screenParams: settings.arguments as FeedbackDetailsScreenParams,
+          ),
+        );
+      case applyFeedback:
+        return screenRouting(
+          const ApplyFeedbackScreen(),
         );
 
       default:

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:organization_pgp/features/home/data/model/home_data_model.dart';
 
 import '../../../../../core/utils/routes.dart';
+import '../../../../feedback/presentation/feedback_screen.dart';
 import '../../../../profile/data/model/profile_model.dart';
 import '../../bloc/home_bloc.dart';
 import '../home_items.dart';
@@ -99,7 +100,7 @@ class HomePage extends StatelessWidget {
               color: Colors.white,
             ),
           ),*/
-          /*HomeItems(
+          HomeItems(
             color: Colors.blueGrey,
             text: "انتقادات و پیشنهادات",
             routeName: Routes.feedbacks,
@@ -110,7 +111,7 @@ class HomePage extends StatelessWidget {
               Icons.feedback_outlined,
               color: Colors.white,
             ),
-          ),*/
+          ),
         ],
       ),
     );
