@@ -6,7 +6,7 @@ class AppImages {
 
   //auth
   static const String loginBG = "assets/images/auth/login_bg.png";
-  static const String bipcLauncher = "assets/images/bipc_launcher2.png";
+  static const String logo = "assets/images/logo.png";
 
   //home
   static const String special = "assets/images/home/special-dark.png";

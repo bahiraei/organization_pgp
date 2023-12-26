@@ -1,12 +1,12 @@
 flutter_icons:
-  image_path: "bipc_launcher2.png"
+  image_path: "logo.png"
   android: true
   adaptive_icon_foreground:
   ios: false
   remove_alpha_ios: false
   web:
     generate: true
-    image_path: "bipc_launcher2.png"
+    image_path: "logo.png"
     theme_color: "#0023d4"
 
 #flutter pub run flutter_launcher_icons

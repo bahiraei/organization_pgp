@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    AppImages.bipcLauncher,
+                                    AppImages.logo,
                                     fit: BoxFit.cover,
                                     height: 140,
                                   ),

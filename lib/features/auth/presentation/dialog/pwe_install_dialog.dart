@@ -57,7 +57,7 @@ class _PwaInstallDialogState extends State<PwaInstallDialog> {
                     children: [
                       const SizedBox(height: 48),
                       Image.asset(
-                        'assets/images/bipc_launcher2.png',
+                        'assets/images/logo.png',
                         width: 96,
                         height: 96,
                       ),

@@ -268,7 +268,7 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  AppImages.bipcLauncher,
+                                  AppImages.logo,
                                   fit: BoxFit.cover,
                                   height: 140,
                                 ),
