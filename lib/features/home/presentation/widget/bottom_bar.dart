@@ -206,7 +206,7 @@ class BottomBarWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 const Text(
-                  'مانیتورینگ',
+                  'مانیتورینگ 360',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 13,

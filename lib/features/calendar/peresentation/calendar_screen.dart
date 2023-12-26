@@ -578,8 +578,9 @@ class MeetingListItem extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Expanded(
+                        Flexible(
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               const Flexible(
                                 child: Text(
