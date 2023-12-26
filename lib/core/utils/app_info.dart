@@ -5,5 +5,5 @@ class AppInfo {
   static String? appSignature;
   static String? fcmToken;
   static int appServerBuildNumber = 0;
-  static const int appVersionForCheckUpdate = 4;
+  static const int appVersionForCheckUpdate = 5;
 }

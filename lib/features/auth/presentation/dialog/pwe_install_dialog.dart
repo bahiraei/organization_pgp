@@ -63,7 +63,7 @@ class _PwaInstallDialogState extends State<PwaInstallDialog> {
                       ),
                       const SizedBox(height: 20),
                       const Text(
-                        "وب اپلیکیشن پتروشیمی بندر امام را\r\nبه صفحه اصلی تلفن همراه خود اضافه کنید",
+                        "وب اپلیکیشن هدایت کشتی خلیج فارس را\r\nبه صفحه اصلی تلفن همراه خود اضافه کنید",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

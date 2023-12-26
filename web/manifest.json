@@ -1,6 +1,6 @@
 {
-    "name": "organization_pgp",
-    "short_name": "organization_pgp",
+    "name": "PGP",
+    "short_name": "PGP",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
