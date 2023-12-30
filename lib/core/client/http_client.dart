@@ -112,8 +112,7 @@ Dio httpClient = Dio(
 
           Helper.log('refresh token sent');
           if (accountInfo != null) {
-            AppInfo.appServerBuildNumber =
-                accountInfo.appVersion.currentVersion;
+            AppInfo.appServerVersion = accountInfo.appVersion;
             if (accountInfo.appVersion.allowToLogin == false && !kIsWeb) {
               return handler.reject(error);
             } else if (accountInfo.appVersion.allowToLogin == false && kIsWeb) {

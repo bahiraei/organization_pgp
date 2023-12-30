@@ -86,7 +86,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 Helper.log(AppInfo.appVersionForCheckUpdate.toString());
                 Helper.log(serverVersion.toString());
 
-                AppInfo.appServerBuildNumber = serverVersion;
+                AppInfo.appServerVersion = accountInfo.appVersion;
 
                 final homeData = await homeRepository.getHome();
                 final sliderData = await homeRepository.getSlider();

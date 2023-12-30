@@ -202,7 +202,9 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                     topLeft: Radius.circular(32),
                   ),
                 ),
-                builder: (context) => const UpdateAlarmBottomSheet(),
+                builder: (context) => UpdateAlarmBottomSheet(
+                  appVersion: AppInfo.appServerVersion,
+                ),
               );
             } else {
               Navigator.of(context).pushNamed(
@@ -287,81 +289,92 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                             ),
                           ),
                           padding: const EdgeInsets.fromLTRB(36, 0, 36, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Gap(48),
-                              const Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'کد تایید را وارد کنید',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Color(0xff333333),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              const Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'کد تایید به شماره موبایل شما ارسال شد',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Directionality(
-                                  textDirection: TextDirection.ltr,
-                                  child: Pinput(
-                                    autofocus: true,
-                                    controller: verifyCodeController,
-                                    keyboardType: TextInputType.number,
-                                    pinputAutovalidateMode:
-                                        PinputAutovalidateMode.onSubmit,
-                                    focusedPinTheme: defaultPinTheme.copyWith(
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).disabledColor,
-                                        borderRadius: BorderRadius.circular(16),
+                          child: BlocBuilder<AuthBloc, AuthState>(
+                            builder: (context, state) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Gap(48),
+                                  const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'کد تایید را وارد کنید',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Color(0xff333333),
+                                        fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    defaultPinTheme: defaultPinTheme,
-                                    onChanged: (value) {
-                                      if (value.length == 4) {
-                                        enabledVerify.value = false;
-                                      } else {
-                                        enabledVerify.value = true;
-                                      }
-                                    },
-                                    onCompleted: (value) {
-                                      /*BlocProvider.of<AuthBloc>(context).add(
-                                          AuthVerifyStarted(
-                                            nationalCode: widget
-                                                .screenParams.nationalCode,
-                                            confirmCode:
-                                                verifyCodeController.text,
-                                          ),
-                                        );*/
-                                    },
                                   ),
-                                ),
-                              ),
-                              const SizedBox(height: 48),
-                              ValueListenableBuilder<bool>(
-                                valueListenable: enabledVerify,
-                                builder: (context, value, _) {
-                                  return Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      BlocBuilder<AuthBloc, AuthState>(
-                                        builder: (context, state) {
-                                          return AppButton(
+                                  const SizedBox(height: 10),
+                                  const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'کد تایید به شماره موبایل شما ارسال شد',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Directionality(
+                                      textDirection: TextDirection.ltr,
+                                      child: Pinput(
+                                        autofocus: true,
+                                        controller: verifyCodeController,
+                                        keyboardType: TextInputType.number,
+                                        /* pinputAutovalidateMode:
+                                            PinputAutovalidateMode.onSubmit,*/
+                                        focusedPinTheme:
+                                            defaultPinTheme.copyWith(
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Theme.of(context).disabledColor,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                          ),
+                                        ),
+                                        defaultPinTheme: defaultPinTheme,
+                                        onChanged: (value) {
+                                          if (value.length == 4) {
+                                            enabledVerify.value = false;
+                                          } else {
+                                            enabledVerify.value = true;
+                                          }
+                                        },
+                                        onCompleted: (value) {},
+                                        onSubmitted: (value) {
+                                          if (state is AuthLoading ||
+                                              value.length != 4) {
+                                            return;
+                                          }
+
+                                          BlocProvider.of<AuthBloc>(context)
+                                              .add(
+                                            AuthVerifyStarted(
+                                              nationalCode: widget
+                                                  .screenParams.nationalCode,
+                                              confirmCode:
+                                                  verifyCodeController.text,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 48),
+                                  ValueListenableBuilder<bool>(
+                                    valueListenable: enabledVerify,
+                                    builder: (context, value, _) {
+                                      return Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          AppButton(
                                             width: 200,
                                             onClick: state is! AuthLoading
                                                 ? () {
@@ -384,96 +397,98 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                                             color: Colors.blue,
                                             height: 54,
                                             text: 'ورود',
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ValueListenableBuilder<int>(
+                                        valueListenable: timerNotifier,
+                                        builder: (context, value, _) {
+                                          if (value == 0) {
+                                            return const SizedBox();
+                                          }
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 24),
+                                            child: Text(
+                                              "${timerNotifier.value} ثانیه تا ارسال مجدد",
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      ValueListenableBuilder<int>(
+                                        valueListenable: timerNotifier,
+                                        builder: (context, value, _) {
+                                          if (value != 0) {
+                                            return const SizedBox();
+                                          }
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8),
+                                            child: TextButton(
+                                              onPressed: value != 0
+                                                  ? () {}
+                                                  : () {
+                                                      BlocProvider.of<AuthBloc>(
+                                                              context)
+                                                          .add(
+                                                        AuthLoginStarted(
+                                                          nationalCode: widget
+                                                              .screenParams
+                                                              .nationalCode,
+                                                        ),
+                                                      );
+                                                    },
+                                              child: const Text(
+                                                "ارسال مجدد کد",
+                                                style: TextStyle(
+                                                  color: Colors.blue,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
                                           );
                                         },
                                       ),
                                     ],
-                                  );
-                                },
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ValueListenableBuilder<int>(
-                                    valueListenable: timerNotifier,
-                                    builder: (context, value, _) {
-                                      if (value == 0) {
-                                        return const SizedBox();
-                                      }
-                                      return Padding(
-                                        padding: const EdgeInsets.only(top: 24),
-                                        child: Text(
-                                          "${timerNotifier.value} ثانیه تا ارسال مجدد",
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      );
-                                    },
                                   ),
-                                  ValueListenableBuilder<int>(
-                                    valueListenable: timerNotifier,
-                                    builder: (context, value, _) {
-                                      if (value != 0) {
-                                        return const SizedBox();
-                                      }
-                                      return Padding(
-                                        padding: const EdgeInsets.only(top: 8),
-                                        child: TextButton(
-                                          onPressed: value != 0
-                                              ? () {}
-                                              : () {
-                                                  BlocProvider.of<AuthBloc>(
-                                                          context)
-                                                      .add(
-                                                    AuthLoginStarted(
-                                                      nationalCode: widget
-                                                          .screenParams
-                                                          .nationalCode,
-                                                    ),
-                                                  );
-                                                },
-                                          child: const Text(
-                                            "ارسال مجدد کد",
-                                            style: TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pushReplacementNamed(
+                                            context,
+                                            Routes.login,
+                                            arguments: LoginScreenParams(
+                                              nationalCode: widget
+                                                  .screenParams.nationalCode,
                                             ),
+                                          );
+                                        },
+                                        child: const Text(
+                                          'ویرایش کد ملی',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pushReplacementNamed(
-                                        context,
-                                        Routes.login,
-                                        arguments: LoginScreenParams(
-                                          nationalCode:
-                                              widget.screenParams.nationalCode,
-                                        ),
-                                      );
-                                    },
-                                    child: const Text(
-                                      'ویرایش کد ملی',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.w500,
                                       ),
-                                    ),
+                                    ],
                                   ),
+                                  const SizedBox(height: 62),
                                 ],
-                              ),
-                              const SizedBox(height: 62),
-                            ],
+                              );
+                            },
                           ),
                         ),
                       ],

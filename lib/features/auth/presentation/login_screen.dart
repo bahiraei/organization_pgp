@@ -17,7 +17,7 @@ import '../data/repository/auth_repository.dart';
 import 'bloc/auth_bloc.dart';
 import 'dialog/pwe_install_dialog.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   final LoginScreenParams? screenParams;
 
   const LoginScreen({
@@ -26,10 +26,46 @@ class LoginScreen extends StatefulWidget {
   });
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider<AuthBloc>(
+      create: (context) {
+        final bloc = AuthBloc(
+          authRepository: authRepository,
+          profileRepository: profileRepository,
+          homeRepository: homeRepository,
+          context: context,
+        );
+
+        return bloc;
+      },
+      child: LoginSubScreen(
+        screenParams: screenParams,
+      ),
+    );
+  }
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenParams {
+  final String? nationalCode;
+
+  LoginScreenParams({
+    this.nationalCode,
+  });
+}
+
+class LoginSubScreen extends StatefulWidget {
+  final LoginScreenParams? screenParams;
+
+  const LoginSubScreen({
+    super.key,
+    this.screenParams,
+  });
+
+  @override
+  State<LoginSubScreen> createState() => _LoginSubScreenState();
+}
+
+class _LoginSubScreenState extends State<LoginSubScreen> {
   final nationalCodeController = TextEditingController();
   final natCodeNotifier = ValueNotifier<bool>(true);
   final showClearButton = ValueNotifier<bool>(false);
@@ -42,18 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     nationalCodeController.text = widget.screenParams?.nationalCode ?? '';
     super.initState();
-
-    final bool isNationalCode =
-        nationalCodeController.text.isValidIranianNationalCode();
-    if (isNationalCode &&
-        nationalCodeController.text.isNotEmpty &&
-        nationalCodeController.text.length == 10) {
-      showClearButton.value = true;
-      natCodeNotifier.value = false;
-    } else {
-      showClearButton.value = false;
-      natCodeNotifier.value = true;
-    }
+    validateUsername(value: nationalCodeController.text);
   }
 
   @override
@@ -91,123 +116,113 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (screenSize == ScreenSize.xlarge) {
       mainMargin = 0.65;
     }
-    return BlocProvider<AuthBloc>(
-      create: (context) {
-        final bloc = AuthBloc(
-          authRepository: authRepository,
-          profileRepository: profileRepository,
-          homeRepository: homeRepository,
-          context: context,
-        );
-
-        return bloc;
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthError) {
+          Helper.showSnackBar(state.exception.message.toString(), context);
+        } else if (state is AuthSuccess) {
+          Navigator.of(context).pushNamed(
+            Routes.verify,
+            arguments: VerifyScreenParams(
+              nationalCode: nationalCodeController.text,
+            ),
+          );
+        }
       },
-      child: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthError) {
-            Helper.showSnackBar(state.exception.message.toString(), context);
-          } else if (state is AuthSuccess) {
-            Navigator.of(context).pushNamed(
-              Routes.verify,
-              arguments: VerifyScreenParams(
-                nationalCode: nationalCodeController.text,
-              ),
-            );
-          }
-        },
-        child: SafeArea(
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.white,
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    height: size.height + keyboardSize + 400,
-                    decoration: const BoxDecoration(
-                      color: Color(0xff00c4ff),
-                    ),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          right: 0,
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: 250,
-                            child: Opacity(
-                              opacity: 0.9,
-                              child: Image.asset(
-                                AppImages.loginBG,
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: size.height + keyboardSize + 400,
+                  decoration: const BoxDecoration(
+                    color: Color(0xff00c4ff),
+                  ),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Positioned(
+                        left: 0,
+                        top: 0,
+                        right: 0,
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 250,
+                          child: Opacity(
+                            opacity: 0.9,
+                            child: Image.asset(
+                              AppImages.loginBG,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 16,
+                        top: 0,
+                        right: 0,
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 220,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                AppImages.logo,
                                 fit: BoxFit.cover,
+                                height: 140,
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        Positioned(
-                          left: 16,
-                          top: 0,
-                          right: 0,
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: 220,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  AppImages.logo,
-                                  fit: BoxFit.cover,
-                                  height: 140,
-                                ),
-                              ],
-                            ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 220),
+                        height: size.height * 0.8 + keyboardSize + 400,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(48),
+                            topRight: Radius.circular(48),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 220),
-                          height: size.height * 0.8 + keyboardSize + 400,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(48),
-                              topRight: Radius.circular(48),
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: size.width * (mainMargin / 2),
-                          ),
-                          child: BlocBuilder<AuthBloc, AuthState>(
-                            builder: (context, state) {
-                              return Form(
-                                key: formKey,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Gap(48),
-                                    const Align(
-                                      alignment: Alignment.topRight,
-                                      child: Text(
-                                        "خوش آمدید!",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Color(0xff383838),
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    const Text(
-                                      "برای استفاده از سرویس های مختلف، لطفاً کد ملی خود را وارد کنید:",
+                        padding: EdgeInsets.symmetric(
+                          horizontal: size.width * (mainMargin / 2),
+                        ),
+                        child: BlocBuilder<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            return Form(
+                              key: formKey,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Gap(48),
+                                  const Align(
+                                    alignment: Alignment.topRight,
+                                    child: Text(
+                                      "خوش آمدید!",
                                       style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 20,
                                         color: Color(0xff383838),
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    const SizedBox(height: 30),
-                                    AppTextFormField(
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                    "برای استفاده از سرویس های مختلف، لطفاً کد ملی خود را وارد کنید:",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xff383838),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+                                  Builder(builder: (context) {
+                                    return AppTextFormField(
                                       fillColor: const Color(0xff8FD5FF)
                                           .withOpacity(0.47),
                                       onTapOutside: (event) {},
@@ -259,188 +274,165 @@ class _LoginScreenState extends State<LoginScreen> {
                                         },
                                       ),
                                       onChanged: (value) {
-                                        final bool isNationalCode =
-                                            value.isValidIranianNationalCode();
-                                        if (isNationalCode &&
-                                            value.isNotEmpty &&
-                                            value.length == 10) {
-                                          showClearButton.value = true;
-                                          natCodeNotifier.value = false;
-                                        } else {
-                                          showClearButton.value = false;
-                                          natCodeNotifier.value = true;
-                                        }
+                                        validateUsername(value: value);
                                       },
                                       autofocus: false,
-                                      /*onFieldSubmitted: (value) {
-                                          final bool isNationalCode =
-                                              nationalCodeController.text
-                                                  .isValidIranianNationalCode();
+                                      onFieldSubmitted: (value) {
+                                        if (!validateUsername(value: value)) {
+                                          return;
+                                        }
+                                        if (state is AuthLoading) {
+                                          return;
+                                        }
 
-                                          if (!isNationalCode) {
-                                            Helper.showSnackBar(
-                                              'کدملی وارد شده صحیح نمیباشد',
-                                              context,
-                                            );
-                                            return;
-                                          }
-                                          if (formKey.currentState!
-                                              .validate()) {
-                                            BlocProvider.of<AuthBloc>(context)
-                                                .add(
-                                              AuthLoginStarted(
-                                                nationalCode:
-                                                    nationalCodeController
-                                                        .text,
-                                                smsAutoFillCode:
-                                                    AppInfo.appSignature,
-                                              ),
-                                            );
-                                          }
-                                        },*/
-                                    ),
-                                    const SizedBox(height: 30),
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          'با ثبت نام در برنامه، ',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Color(0xff383838),
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  const PolicyDialog(),
-                                            );
-                                          },
-                                          child: const Text(
-                                            'شرایط و قوانین ',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.blueAccent,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        const Text(
-                                          'را قبول می کنم.',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Color(0xff383838),
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 30),
-                                    ValueListenableBuilder<bool>(
-                                      valueListenable: natCodeNotifier,
-                                      builder: (context, value, _) {
-                                        return Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Expanded(
-                                              child: SizedBox(
-                                                height: 52,
-                                                child: ElevatedButton(
-                                                  onPressed: state
-                                                              is AuthLoading ||
-                                                          value
-                                                      ? null
-                                                      : () {
-                                                          final bool
-                                                              isNationalCode =
-                                                              nationalCodeController
-                                                                  .text
-                                                                  .isValidIranianNationalCode();
-
-                                                          if (!isNationalCode) {
-                                                            Helper.showSnackBar(
-                                                              'کدملی وارد شده صحیح نمیباشد',
-                                                              context,
-                                                            );
-                                                            return;
-                                                          }
-                                                          if (formKey
-                                                              .currentState!
-                                                              .validate()) {
-                                                            BlocProvider.of<
-                                                                        AuthBloc>(
-                                                                    context)
-                                                                .add(
-                                                              AuthLoginStarted(
-                                                                nationalCode:
-                                                                    nationalCodeController
-                                                                        .text,
-                                                                smsAutoFillCode:
-                                                                    AppInfo
-                                                                        .appSignature,
-                                                              ),
-                                                            );
-                                                          }
-                                                        },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    elevation: 0,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16),
-                                                      side: BorderSide.none,
-                                                    ),
-                                                    backgroundColor: value
-                                                        ? Theme.of(context)
-                                                            .disabledColor
-                                                        : Colors.blue,
-                                                  ),
-                                                  child: state is AuthLoading
-                                                      ? const CupertinoActivityIndicator(
-                                                          color: Colors.white,
-                                                        )
-                                                      : const Text(
-                                                          'ورود',
-                                                          style: TextStyle(
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
+                                        if (formKey.currentState!.validate()) {
+                                          onLoginButtonClicked();
+                                        }
                                       },
-                                    ),
-                                    const SizedBox(height: 120),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
+                                    );
+                                  }),
+                                  const SizedBox(height: 30),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        'با ثبت نام در برنامه، ',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xff383838),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                const PolicyDialog(),
+                                          );
+                                        },
+                                        child: const Text(
+                                          'شرایط و قوانین ',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.blueAccent,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      const Text(
+                                        'را قبول می کنم.',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xff383838),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 30),
+                                  ValueListenableBuilder<bool>(
+                                    valueListenable: natCodeNotifier,
+                                    builder: (context, value, _) {
+                                      return Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: SizedBox(
+                                              height: 52,
+                                              child: ElevatedButton(
+                                                onPressed:
+                                                    state is AuthLoading ||
+                                                            value
+                                                        ? null
+                                                        : () {
+                                                            onLoginButtonClicked();
+                                                          },
+                                                style: ElevatedButton.styleFrom(
+                                                  elevation: 0,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    side: BorderSide.none,
+                                                  ),
+                                                  backgroundColor: value
+                                                      ? Theme.of(context)
+                                                          .disabledColor
+                                                      : Colors.blue,
+                                                ),
+                                                child: state is AuthLoading
+                                                    ? const CupertinoActivityIndicator(
+                                                        color: Colors.white,
+                                                      )
+                                                    : const Text(
+                                                        'ورود',
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(height: 120),
+                                ],
+                              ),
+                            );
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
       ),
     );
   }
-}
 
-class LoginScreenParams {
-  final String? nationalCode;
+  bool onLoginButtonClicked() {
+    final bool isNationalCode =
+        nationalCodeController.text.isValidIranianNationalCode();
 
-  LoginScreenParams({
-    this.nationalCode,
-  });
+    if (!isNationalCode) {
+      Helper.showSnackBar(
+        'کدملی وارد شده صحیح نمیباشد',
+        context,
+      );
+      return false;
+    }
+    if (formKey.currentState!.validate()) {
+      BlocProvider.of<AuthBloc>(context).add(
+        AuthLoginStarted(
+          nationalCode: nationalCodeController.text,
+          smsAutoFillCode: AppInfo.appSignature,
+        ),
+      );
+    }
+    return true;
+  }
+
+  bool validateUsername({
+    required String value,
+  }) {
+    final bool isNationalCode =
+        nationalCodeController.text.isValidIranianNationalCode();
+    if (isNationalCode &&
+        nationalCodeController.text.isNotEmpty &&
+        nationalCodeController.text.length == 10) {
+      showClearButton.value = true;
+      natCodeNotifier.value = false;
+      return true;
+    } else {
+      showClearButton.value = false;
+      natCodeNotifier.value = true;
+      return false;
+    }
+  }
 }

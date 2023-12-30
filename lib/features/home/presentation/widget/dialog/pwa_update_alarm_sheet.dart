@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../../../../auth/data/model/app_version.dart';
+
 class UpdateAlarmBottomSheet extends StatelessWidget {
-  const UpdateAlarmBottomSheet({super.key});
+  final AppVersion appVersion;
+  const UpdateAlarmBottomSheet({
+    super.key,
+    required this.appVersion,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +57,17 @@ class UpdateAlarmBottomSheet extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                   child: Column(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.update_rounded,
                         color: Colors.blueGrey,
                         size: 96,
                       ),
-                      Gap(8),
-                      Row(
+                      const Gap(8),
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -73,20 +79,21 @@ class UpdateAlarmBottomSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Gap(32),
+                      const Gap(32),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'بروزرسانی جدیدی یافت شده است.',
-                            style: TextStyle(
+                            appVersion.description ??
+                                'بروزرسانی جدیدی یافت شده است.',
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black54,
                             ),
                           ),
                         ],
                       ),
-                      Gap(24),
+                      const Gap(24),
                     ],
                   ),
                 ),

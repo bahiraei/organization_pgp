@@ -53,10 +53,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final screenSize = Screen.fromContext(context).screenSize;
 
     Helper.log(
-        "${AppInfo.appVersionForCheckUpdate} < ${AppInfo.appServerBuildNumber} => ${AppInfo.appVersionForCheckUpdate < AppInfo.appServerBuildNumber}");
+        "${AppInfo.appVersionForCheckUpdate} < ${AppInfo.appServerVersion.currentVersion} => ${AppInfo.appVersionForCheckUpdate < AppInfo.appServerVersion.currentVersion}");
 
     if (!isUpdateShowed &&
-        (AppInfo.appServerBuildNumber > AppInfo.appVersionForCheckUpdate) &&
+        (AppInfo.appServerVersion.currentVersion >
+            AppInfo.appVersionForCheckUpdate) &&
         kIsWeb) {
       isUpdateShowed = true;
       Future.delayed(
@@ -81,7 +82,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 topLeft: Radius.circular(32),
               ),
             ),
-            builder: (context) => const UpdateAlarmBottomSheet(),
+            builder: (context) => UpdateAlarmBottomSheet(
+              appVersion: AppInfo.appServerVersion,
+            ),
           );
         },
       );
