@@ -290,7 +290,7 @@ class _FeedBackAdminListItemState extends State<FeedBackAdminListItem> {
                         'assets/images/feedback/message-exclamation.svg',
                         colorFilter: const ColorFilter.mode(
                           Colors.orange,
-                          BlendMode.color,
+                          BlendMode.srcIn,
                         ),
                       ),
                     ),

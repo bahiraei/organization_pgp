@@ -5,6 +5,7 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../core/service/file-manager-handler.dart';
 import '../../core/service/permission-handler.dart';
+import '../../core/utils/helper.dart';
 
 class PdfScreen extends StatefulWidget {
   final PdfScreenParams params;
@@ -64,6 +65,13 @@ class _PdfScreenState extends State<PdfScreen> {
         controller: _pdfViewerController,
         onDocumentLoaded: (details) {
           setState(() {});
+        },
+        onDocumentLoadFailed: (details) {
+          Helper.showToast(
+            title: details.error,
+            description: details.description,
+            context: context,
+          );
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

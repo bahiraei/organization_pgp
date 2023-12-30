@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
@@ -6,14 +7,14 @@ class Helper {
     String message, {
     bool isForce = false,
   }) {
-    debugPrint(message);
-    /*if (kIsWeb) {
+    /*debugPrint(message);*/
+    if (kIsWeb) {
       return;
     } else if (!isForce || !kDebugMode) {
       return;
     } else {
       debugPrint(message);
-    }*/
+    }
   }
 
   static showSnackBar(String message, BuildContext context) {
