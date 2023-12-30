@@ -42,6 +42,18 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     nationalCodeController.text = widget.screenParams?.nationalCode ?? '';
     super.initState();
+
+    final bool isNationalCode =
+        nationalCodeController.text.isValidIranianNationalCode();
+    if (isNationalCode &&
+        nationalCodeController.text.isNotEmpty &&
+        nationalCodeController.text.length == 10) {
+      showClearButton.value = true;
+      natCodeNotifier.value = false;
+    } else {
+      showClearButton.value = false;
+      natCodeNotifier.value = true;
+    }
   }
 
   @override
@@ -340,7 +352,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   onPressed: state
                                                               is AuthLoading ||
                                                           value
-                                                      ? () {}
+                                                      ? null
                                                       : () {
                                                           final bool
                                                               isNationalCode =
