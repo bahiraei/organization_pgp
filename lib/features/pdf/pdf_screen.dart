@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:open_file_safe_plus/open_file_safe_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../core/service/file-manager-handler.dart';
 import '../../core/service/permission-handler.dart';
-import '../../core/utils/helper.dart';
 
 class PdfScreen extends StatefulWidget {
   final PdfScreenParams params;
@@ -66,12 +66,41 @@ class _PdfScreenState extends State<PdfScreen> {
         onDocumentLoaded: (details) {
           setState(() {});
         },
-        onDocumentLoadFailed: (details) {
-          Helper.showToast(
+        onDocumentLoadFailed: (details) async {
+          /*Helper.showToast(
             title: details.error,
             description: details.description,
             context: context,
-          );
+          );*/
+          if (kIsWeb) {
+            FileManagerHandler.saveFileInWeb(
+              widget.params.data,
+              '${widget.params.name}.pdf',
+            );
+          } else {
+            final status = await PermissionHandler.getStoragePermission();
+
+            if (status != PermissionStatus.granted) {
+              return;
+            }
+            final file = await FileManagerHandler.saveFile(
+              name: '${widget.params.name}.pdf',
+              data: widget.params.data,
+
+              /*'fish-${state.year}-${state.month}.pdf',*/
+            );
+            if (mounted && file != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'فایل با موفقیت ذخیره شد',
+                  ),
+                ),
+              );
+
+              OpenFileSafePlus.open(file.path);
+            }
+          }
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
