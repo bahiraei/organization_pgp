@@ -164,7 +164,7 @@ class _FeedbackDetailsAdminViewState extends State<FeedbackDetailsAdminView> {
                                   color: const Color(0xfff1f0ff),
                                 ),
                                 child: Text(
-                                  widget.feedback.fullText ?? '',
+                                  widget.feedback.fullText,
                                   style: const TextStyle(
                                     fontSize: 14,
                                     height: 2,
@@ -334,7 +334,7 @@ class _FeedbackDetailsAdminViewState extends State<FeedbackDetailsAdminView> {
                                             ),
                                             const SizedBox(height: 16),
                                             Text(
-                                              widget.feedback.fullText ?? '',
+                                              widget.feedback.fullText,
                                               style: const TextStyle(
                                                 fontSize: 14,
                                                 height: 2,

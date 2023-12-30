@@ -63,11 +63,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       onPressed: () async {
                         await Navigator.of(context).pushNamed(Routes.message);
 
-                        BlocProvider.of<HomeBloc>(context)
-                            .add(const HomeStarted(
-                          isRefreshing: true,
-                          homData: null,
-                        ));
+                        if (mounted) {
+                          BlocProvider.of<HomeBloc>(context)
+                              .add(const HomeStarted(
+                            isRefreshing: true,
+                            homData: null,
+                          ));
+                        }
                       },
                       icon: const Icon(
                         Icons.notifications,

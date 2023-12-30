@@ -125,11 +125,8 @@ class _AdminMessageDetailScreenState extends State<AdminMessageDetailScreen> {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              widget
-                                                      .screenParams
-                                                      .adminMessageModel
-                                                      .title ??
-                                                  '',
+                                              widget.screenParams
+                                                  .adminMessageModel.title,
                                               textAlign: TextAlign.start,
                                               style: const TextStyle(
                                                 fontSize: 18,

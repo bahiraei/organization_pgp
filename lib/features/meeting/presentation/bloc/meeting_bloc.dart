@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     bool meetingMoreData = true;
     int meetingPage = 0;
 
-    List<MeetingModel> _meetingHistory = [];
+    List<MeetingModel> meetingHistory = [];
 
     bool isMeetingLoading = false;
 
@@ -37,7 +39,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
             }
 
             if (!event.isScrolling) {
-              _meetingHistory = [];
+              meetingHistory = [];
               meetingPage = 0;
               meetingMoreData = true;
               isMeetingLoading = false;
@@ -52,27 +54,27 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
             meetingPage++;
             meetingMoreData = result.moreData;
 
-            if (result.meetings.isEmpty && _meetingHistory.isNotEmpty) {
+            if (result.meetings.isEmpty && meetingHistory.isNotEmpty) {
               meetingPage--;
               isMeetingLoading = false;
 
               emit(
                 MeetingSuccess(
-                  meetings: _meetingHistory,
+                  meetings: meetingHistory,
                   moreData: result.moreData,
                 ),
               );
-            } else if (result.meetings.isEmpty && _meetingHistory.isEmpty) {
+            } else if (result.meetings.isEmpty && meetingHistory.isEmpty) {
               isMeetingLoading = false;
               emit(
                 MeetingEmpty(),
               );
             } else {
               isMeetingLoading = false;
-              _meetingHistory = _meetingHistory + result.meetings;
+              meetingHistory = meetingHistory + result.meetings;
               emit(
                 MeetingSuccess(
-                  meetings: _meetingHistory,
+                  meetings: meetingHistory,
                   moreData: result.moreData,
                 ),
               );

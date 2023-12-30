@@ -127,7 +127,7 @@ class FeedbackDetailsUserView extends StatelessWidget {
                               color: const Color(0xfff1f0ff),
                             ),
                             child: Text(
-                              feedback.fullText ?? '',
+                              feedback.fullText,
                               style: const TextStyle(
                                 fontSize: 14,
                                 height: 2,
@@ -167,7 +167,7 @@ class FeedbackDetailsUserView extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 16),
                                       Text(
-                                        feedback.fullText ?? '',
+                                        feedback.fullText,
                                         style: const TextStyle(
                                           fontSize: 14,
                                           height: 2,

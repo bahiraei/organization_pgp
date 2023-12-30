@@ -8,7 +8,7 @@ import '../../../../profile/data/model/profile_model.dart';
 import '../../bloc/home_bloc.dart';
 import '../home_items.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final HomeData? homaData;
   final ProfileData? profile;
 
@@ -18,6 +18,11 @@ class HomePage extends StatelessWidget {
     required this.profile,
   });
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,10 +51,10 @@ class HomePage extends StatelessWidget {
               return HomeItems(
                 color: Colors.red,
                 text: "پیام ها",
-                badgeCount: homaData?.newMessageCount == null ||
-                        homaData?.newMessageCount == 0
+                badgeCount: widget.homaData?.newMessageCount == null ||
+                        widget.homaData?.newMessageCount == 0
                     ? null
-                    : homaData?.newMessageCount,
+                    : widget.homaData?.newMessageCount,
                 routeName: Routes.message,
                 onTap: () async {
                   await Navigator.pushNamed(
@@ -57,9 +62,11 @@ class HomePage extends StatelessWidget {
                     Routes.message,
                   );
 
-                  BlocProvider.of<HomeBloc>(context).add(const HomeStarted(
-                    isRefreshing: true,
-                  ));
+                  if (mounted) {
+                    BlocProvider.of<HomeBloc>(context).add(const HomeStarted(
+                      isRefreshing: true,
+                    ));
+                  }
                 },
                 child: const Icon(
                   Icons.perm_media,
@@ -105,7 +112,7 @@ class HomePage extends StatelessWidget {
             text: "انتقادات و پیشنهادات",
             routeName: Routes.feedbacks,
             arguments: FeedbackScreenParams(
-              profileData: profile,
+              profileData: widget.profile,
             ),
             child: const Icon(
               Icons.feedback_outlined,

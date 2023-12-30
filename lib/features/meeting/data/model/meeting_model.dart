@@ -39,8 +39,6 @@ class MeetingModel {
   });
 
   factory MeetingModel.fromJson(Map<String, dynamic> json) {
-    var data = <MeetingModel>[];
-
     return MeetingModel(
       id: json['id'],
       title: json['title'],

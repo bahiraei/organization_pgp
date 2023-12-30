@@ -18,8 +18,6 @@ class MeetingSubscribersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     final screenSize = Screen.fromContext(context).screenSize;
 
     double mainMargin = 0;

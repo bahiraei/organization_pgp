@@ -7,8 +7,8 @@ class UpdateAlarmBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
+    return PopScope(
+      canPop: false,
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Container(

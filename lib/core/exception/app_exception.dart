@@ -153,12 +153,10 @@ class BadRequestException extends AppException {
 
 class ToManyRequestException extends AppException {
   ToManyRequestException({
-    String? message,
-    String? url,
+    super.message,
+    super.url,
   }) : super(
-          message: message,
           prefix: 'To Many Request',
-          url: url,
         );
 }
 

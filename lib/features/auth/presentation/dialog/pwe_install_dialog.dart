@@ -29,8 +29,8 @@ class _PwaInstallDialogState extends State<PwaInstallDialog> {
       mainMargin = 0.35;
     }
 
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
+    return PopScope(
+      canPop: false,
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Dialog(

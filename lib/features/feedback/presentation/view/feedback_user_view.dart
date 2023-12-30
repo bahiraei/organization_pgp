@@ -174,7 +174,7 @@ class _FeedbackUserViewState extends State<FeedbackUserView> {
                       Routes.applyFeedback,
                     );
 
-                    if (result == true ?? false) {
+                    if (result == true) {
                       if (mounted) {
                         BlocProvider.of<FeedbackBloc>(context)
                             .add(FeedbackUserStarted());

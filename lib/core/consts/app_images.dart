@@ -1,9 +1,4 @@
 class AppImages {
-  //splash
-  static const String petroshimi_logo =
-      "assets/images/splash/petroshimi_logo.png";
-  static const String splashImage = "assets/images/splash/splash_image.png";
-
   //auth
   static const String loginBG = "assets/images/auth/login_bg.png";
   static const String logo = "assets/images/logo.png";

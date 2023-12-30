@@ -17,10 +17,12 @@ class FirebaseMessagingService {
         const Duration(seconds: 45),
         onTimeout: () {
           Helper.log('firebase get token error onTimeout');
+          return null;
         },
       ).onError(
         (error, stackTrace) {
           Helper.log(error.toString());
+          return null;
         },
       );
 
@@ -59,7 +61,7 @@ class FirebaseMessagingService {
       FirebaseMessaging.instance.onTokenRefresh.listen(
         (fcmToken) async {
           Helper.log('Refresh fcmToken => $fcmToken');
-          AppInfo.fcmToken = fcmToken ?? '';
+          AppInfo.fcmToken = fcmToken;
 
           try {
             await authRepository.saveFireBaseToken(
@@ -81,7 +83,7 @@ class FirebaseMessagingService {
 
   static Future<void> deleteToken() async {
     try {
-      final fcmToken = await FirebaseMessaging.instance.deleteToken().timeout(
+      await FirebaseMessaging.instance.deleteToken().timeout(
         const Duration(seconds: 3),
         onTimeout: () {
           Helper.log('firebase get token error ');

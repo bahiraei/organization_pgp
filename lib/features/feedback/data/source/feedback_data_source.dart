@@ -82,7 +82,7 @@ class FeedbackDataSource
       data: formData,
     );
 
-    final validated = validateResponse(response);
+    validateResponse(response);
   }
 
   @override
@@ -114,6 +114,6 @@ class FeedbackDataSource
       },
     );
 
-    final validated = validateResponse(response);
+    validateResponse(response);
   }
 }

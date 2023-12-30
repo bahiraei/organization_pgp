@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:toastification/toastification.dart';
@@ -29,9 +28,6 @@ class _RegisterCommentBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final screenSize = Screen.fromContext(context).screenSize;
-
     return BlocProvider<MessageBloc>(
       create: (context) => MessageBloc(
         repository: multimediaRepository,

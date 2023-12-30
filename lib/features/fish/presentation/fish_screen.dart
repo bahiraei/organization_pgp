@@ -252,8 +252,6 @@ class _FishScreenState extends State<FishScreen> {
                               } else {
                                 return const SizedBox();
                               }
-
-                              throw Exception('state $state not found!');
                             },
                           ),
                         ],

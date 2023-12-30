@@ -126,7 +126,7 @@ class MessageDataSource
       },
     );
 
-    final validated = validateResponse(response);
+    validateResponse(response);
   }
 
   @override
@@ -177,7 +177,7 @@ class MessageDataSource
                   filename: image.name,
                 )
               : MultipartFile.fromFileSync(
-                  image.path!,
+                  image.path,
                   filename: image.name,
                 ),
         ),
@@ -189,7 +189,7 @@ class MessageDataSource
       data: formData,
     );
 
-    final validated = validateResponse(response);
+    validateResponse(response);
   }
 
   @override
@@ -221,7 +221,7 @@ class MessageDataSource
       },
     );
 
-    final validated = validateResponse(response);
+    validateResponse(response);
   }
 
   @override
@@ -263,7 +263,7 @@ class MessageDataSource
                   filename: image.name,
                 )
               : MultipartFile.fromFileSync(
-                  image.path!,
+                  image.path,
                   filename: image.name,
                 ),
         ),
@@ -275,6 +275,6 @@ class MessageDataSource
       data: formData,
     );
 
-    final validated = validateResponse(response);
+    validateResponse(response);
   }
 }

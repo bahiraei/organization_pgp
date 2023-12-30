@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
@@ -35,7 +37,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
 
           final result = await repository.getAll();
 
-          if (result.feedbacks?.isEmpty ?? true) {
+          if (result.feedbacks.isEmpty) {
             emit(FeedbackEmpty());
           } else {
             emit(
@@ -61,7 +63,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         try {
           emit(FeedbackApplyUserLoading());
 
-          final result = await repository.save(
+          await repository.save(
             title: event.title,
             description: event.description,
             type: event.type,
@@ -151,7 +153,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         try {
           emit(FeedbackLoading());
 
-          final result = await repository.answerAdmin(
+          await repository.answerAdmin(
             feedbackId: event.feedbackId,
             text: event.text,
           );

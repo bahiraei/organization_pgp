@@ -216,7 +216,7 @@ class _FeedbackAdminViewState extends State<FeedbackAdminView> {
   }
 }
 
-class FeedBackAdminListItem extends StatelessWidget {
+class FeedBackAdminListItem extends StatefulWidget {
   final ProfileData profileData;
   final AdminFeedbackModel feedback;
 
@@ -227,18 +227,23 @@ class FeedBackAdminListItem extends StatelessWidget {
   });
 
   @override
+  State<FeedBackAdminListItem> createState() => _FeedBackAdminListItemState();
+}
+
+class _FeedBackAdminListItemState extends State<FeedBackAdminListItem> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
         final result = await Navigator.of(context).pushNamed(
           Routes.feedbackDetails,
           arguments: FeedbackDetailsScreenParams(
-            profileData: profileData,
-            adminFeedback: feedback,
+            profileData: widget.profileData,
+            adminFeedback: widget.feedback,
           ),
         );
 
-        if (result == true) {
+        if (result == true && mounted) {
           BlocProvider.of<FeedbackBloc>(context).add(
             const FeedbackAdminStarted(
               isScrolling: false,
@@ -267,7 +272,7 @@ class FeedBackAdminListItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: (feedback.answerDate?.isEmpty ?? true)
+                color: (widget.feedback.answerDate?.isEmpty ?? true)
                     ? Colors.orange.withOpacity(0.2)
                     : Colors.blue.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(6),
@@ -275,7 +280,7 @@ class FeedBackAdminListItem extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (feedback.answerDate?.isEmpty ?? true)
+                  if (widget.feedback.answerDate?.isEmpty ?? true)
                     SizedBox(
                       width: 24,
                       height: 24,
@@ -283,10 +288,13 @@ class FeedBackAdminListItem extends StatelessWidget {
                         width: 24,
                         height: 24,
                         'assets/images/feedback/message-exclamation.svg',
-                        color: Colors.orange,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.orange,
+                          BlendMode.color,
+                        ),
                       ),
                     ),
-                  if (feedback.answerDate?.isNotEmpty ?? false)
+                  if (widget.feedback.answerDate?.isNotEmpty ?? false)
                     SizedBox(
                       width: 24,
                       height: 24,
@@ -294,7 +302,10 @@ class FeedBackAdminListItem extends StatelessWidget {
                         width: 24,
                         height: 24,
                         'assets/images/feedback/message-check.svg',
-                        color: Colors.blue,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.blue,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                 ],
@@ -310,7 +321,7 @@ class FeedBackAdminListItem extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          feedback.title,
+                          widget.feedback.title,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -343,7 +354,7 @@ class FeedBackAdminListItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        feedback.departmentsEnum.value,
+                        widget.feedback.departmentsEnum.value,
                         style: const TextStyle(
                           fontSize: 13,
                         ),

@@ -2,7 +2,7 @@ name: organization_pgp
 description: "A new Flutter project."
 publish_to: 'none'
 
-version: 1.0.5+5
+version: 1.0.6+6
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -55,7 +55,7 @@ dependencies:
   persian_datetime_picker: ^2.6.0
   persian_linear_date_picker: ^0.0.2
   flutter_adaptive_ui: ^0.8.0+1
-  syncfusion_flutter_pdfviewer: ^24.1.41
+  syncfusion_flutter_pdfviewer: ^24.1.43
   dotted_border: ^2.1.0
   dropdown_button2: ^2.3.9
   loading_animation_widget: ^1.2.0+4

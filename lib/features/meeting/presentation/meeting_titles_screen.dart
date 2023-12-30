@@ -15,8 +15,6 @@ class MeetingTitleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     final screenSize = Screen.fromContext(context).screenSize;
 
     double mainMargin = 0;
@@ -116,7 +114,7 @@ class MeetingTitleScreen extends StatelessWidget {
                                   fontSize: 14,
                                 ),
                               ),
-                              Gap(4),
+                              const Gap(4),
                               Text(
                                 meeting.headOf ?? '',
                                 style: const TextStyle(
@@ -136,7 +134,7 @@ class MeetingTitleScreen extends StatelessWidget {
                                     fontSize: 14,
                                   ),
                                 ),
-                                Gap(4),
+                                const Gap(4),
                                 Text(
                                   meeting.secretary ?? '',
                                   style: const TextStyle(

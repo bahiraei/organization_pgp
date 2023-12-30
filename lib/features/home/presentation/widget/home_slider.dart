@@ -45,6 +45,17 @@ class HomeSlider extends StatelessWidget {
                                 imageUrl:
                                     "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
                                 borderRadius: BorderRadius.circular(16),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ShowImageFullScreen(
+                                        imageUrl:
+                                            "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           );
@@ -101,6 +112,18 @@ class HomeSlider extends StatelessWidget {
                                   imageUrl:
                                       "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
                                   borderRadius: BorderRadius.circular(16),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ShowImageFullScreen(
+                                          imageUrl:
+                                              "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             );
@@ -162,6 +185,18 @@ class HomeSlider extends StatelessWidget {
                                         imageUrl:
                                             "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
                                         borderRadius: BorderRadius.circular(16),
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShowImageFullScreen(
+                                                imageUrl:
+                                                    "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   );
@@ -226,6 +261,18 @@ class HomeSlider extends StatelessWidget {
                                         imageUrl:
                                             "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
                                         borderRadius: BorderRadius.circular(16),
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShowImageFullScreen(
+                                                imageUrl:
+                                                    "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   );
@@ -290,6 +337,18 @@ class HomeSlider extends StatelessWidget {
                                         imageUrl:
                                             "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
                                         borderRadius: BorderRadius.circular(16),
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShowImageFullScreen(
+                                                imageUrl:
+                                                    "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   );
@@ -354,6 +413,18 @@ class HomeSlider extends StatelessWidget {
                                         imageUrl:
                                             "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
                                         borderRadius: BorderRadius.circular(16),
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShowImageFullScreen(
+                                                imageUrl:
+                                                    "${AppEnvironment.sliderBaseUrl}${slider.fileName}",
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   );

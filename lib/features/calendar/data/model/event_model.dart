@@ -41,8 +41,6 @@ class EventModel {
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
-    var data = <EventModel>[];
-
     return EventModel(
       id: json['id'],
       title: json['title'],

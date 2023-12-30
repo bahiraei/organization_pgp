@@ -200,6 +200,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                   meeting: listItems[index],
                                 );
                               }
+                              return null;
                             },
                           ),
                         )

@@ -244,8 +244,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                     setState(() {
                       isInstalling = false;
                     });
-                    PackageInstallerStatus installationStatus =
-                        PackageInstallerStatus.byCode(statusCode);
+                    /*PackageInstallerStatus installationStatus =
+                        PackageInstallerStatus.byCode(statusCode);*/
                   }
                 } else {
                   if (mounted) {
@@ -433,7 +433,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
       startNotifier.value = false;
       completeNotifier.value = false;
       if (e is DioException) {
-        Helper.showSnackBar('خطا در دانلود بروزرسانی', context);
+        if (mounted) {
+          Helper.showSnackBar('خطا در دانلود بروزرسانی', context);
+        }
       }
       Helper.log(e.toString());
     }

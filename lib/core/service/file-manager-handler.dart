@@ -28,7 +28,7 @@ class FileManagerHandler {
   }
 
   static void saveFileInWeb(List<int> bytes, String fileName) {
-    final anchor = html.AnchorElement(
+    html.AnchorElement(
       href: html.Url.createObjectUrlFromBlob(
         html.Blob([bytes], 'application/octet-stream'),
       ),
