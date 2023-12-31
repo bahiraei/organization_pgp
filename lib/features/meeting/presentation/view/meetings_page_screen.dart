@@ -309,10 +309,12 @@ class MeetingListItem extends StatelessWidget {
           const Gap(24),
           Row(
             children: [
-              Text(
-                meeting.description ?? '',
-                style: const TextStyle(
-                  fontSize: 14,
+              Flexible(
+                child: Text(
+                  meeting.description ?? '',
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ],
