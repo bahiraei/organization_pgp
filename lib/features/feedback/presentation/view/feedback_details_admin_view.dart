@@ -455,7 +455,8 @@ class _FeedbackDetailsAdminViewState extends State<FeedbackDetailsAdminView> {
                                                 },
                                                 height: 54,
                                               ),
-                                            )
+                                            ),
+                                            const SizedBox(height: 76),
                                           ],
                                         ),
                                       );
