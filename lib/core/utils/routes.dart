@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:organization_pgp/features/secondary_pdf/secondary_pdf_screen.dart';
 
 import '../../features/auth/data/model/app_version.dart';
 import '../../features/auth/presentation/login_screen.dart';
@@ -45,6 +46,7 @@ class Routes {
   static const String phoneBookDetails = "/phoneBookDetails";
   static const String fish = "/fish";
   static const String pdf = "/pdf";
+  static const String secondaryPDF = "/secondaryPDF";
   static const String profile = "/profile";
   static const String createMessage = "/createMessage";
   static const String createMessageList = "/createMessageList";
@@ -125,6 +127,13 @@ class Routes {
         return screenRouting(
           PdfScreen(
             params: settings.arguments as PdfScreenParams,
+          ),
+        );
+
+      case secondaryPDF:
+        return screenRouting(
+          SecondaryPdfScreen(
+            params: settings.arguments as SecondaryPdfScreenParams,
           ),
         );
 

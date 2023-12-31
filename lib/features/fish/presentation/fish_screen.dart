@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:organization_pgp/features/secondary_pdf/secondary_pdf_screen.dart';
 
 import '../../../core/utils/helper.dart';
 import '../../../core/utils/routes.dart';
@@ -8,7 +9,6 @@ import '../../../core/widgets/app_bg.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/month_picker.dart';
 import '../../../core/widgets/title_bar.dart';
-import '../../pdf/pdf_screen.dart';
 import '../data/repository/fish_repository.dart';
 import 'bloc/fish_bloc.dart';
 
@@ -84,8 +84,8 @@ class _FishScreenState extends State<FishScreen> {
                             listener: (context, state) {
                               if (state is FishSuccess) {
                                 Navigator.of(context).pushNamed(
-                                  Routes.pdf,
-                                  arguments: PdfScreenParams(
+                                  Routes.secondaryPDF,
+                                  arguments: SecondaryPdfScreenParams(
                                     data: state.file,
                                     name: 'fish-${state.year}-${state.month}',
                                     pageTitle: "فیش حقوقی",
