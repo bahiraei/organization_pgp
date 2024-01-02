@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 
+import '../../../profile/data/model/profile_model.dart';
+
 class CustomNavigationBar extends StatefulWidget {
   final ValueNotifier<int> tabIndexNotifier;
+  final ProfileData? profile;
 
   const CustomNavigationBar({
     super.key,
     required this.tabIndexNotifier,
+    required this.profile,
   });
 
   @override
@@ -60,6 +64,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                   widget.tabIndexNotifier.value = value;
                 },
                 currentIndex: widget.tabIndexNotifier.value,
+                profile: widget.profile,
               );
             },
           ),
@@ -71,12 +76,14 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
 class BottomBarWidget extends StatelessWidget {
   final int currentIndex;
+  final ProfileData? profile;
   final Function(int value) onTap;
 
   const BottomBarWidget({
     super.key,
     required this.onTap,
     required this.currentIndex,
+    required this.profile,
   });
 
   @override
@@ -171,52 +178,54 @@ class BottomBarWidget extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          width: 0.8,
-          height: 48,
-          color: Colors.black12,
-        ),
-        Expanded(
-          child: InkWell(
-            onTap: () {
-              onTap(2);
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: currentIndex == 2 ? Colors.blue : Colors.blueGrey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const SizedBox(
-                    width: 25,
-                    height: 25,
-                    child: Icon(
-                      Icons.star,
-                      color: Colors.white,
-                      size: 20,
+        if (profile?.isAdmin ?? false)
+          Container(
+            width: 0.8,
+            height: 48,
+            color: Colors.black12,
+          ),
+        if (profile?.isAdmin ?? false)
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                onTap(2);
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: currentIndex == 2 ? Colors.blue : Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const SizedBox(
+                      width: 25,
+                      height: 25,
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 6),
-                const Text(
-                  'مانیتورینگ 360',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.black,
+                  const SizedBox(height: 6),
+                  const Text(
+                    'مانیتورینگ 360',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
       ],
     );
   }

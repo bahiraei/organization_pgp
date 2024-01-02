@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final screenSize = Screen.fromContext(context).screenSize;
     double mainMarginPercent = 1.0;
     if (screenSize == ScreenSize.xsmall) {
-      mainMarginPercent = 0.05;
+      mainMarginPercent = 0.0;
     } else if (screenSize == ScreenSize.small) {
       mainMarginPercent = 0.15;
     } else if (screenSize == ScreenSize.medium) {

@@ -206,6 +206,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       drawerTap: () => scaffoldKey.currentState?.openDrawer(),
                       tabIndexNotifier: tabIndexNotifier,
                       homeData: state.homeData.data,
+                      profile: state.profileData,
                     ),
                   ),
                   drawer: CustomDrawer(
@@ -334,6 +335,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                   bottomNavigationBar: CustomNavigationBar(
                     tabIndexNotifier: tabIndexNotifier,
+                    profile: state.profileData,
                   ),
                 ),
               );
@@ -346,6 +348,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     homeData: widget.screenParams.homeData?.data,
                     drawerTap: () => scaffoldKey.currentState?.openDrawer(),
                     tabIndexNotifier: tabIndexNotifier,
+                    profile: widget.screenParams.profileData?.data,
                   ),
                 ),
                 body: Builder(
@@ -403,6 +406,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 bottomNavigationBar: CustomNavigationBar(
                   tabIndexNotifier: tabIndexNotifier,
+                  profile: widget.screenParams.profileData!.data,
                 ),
               );
             }

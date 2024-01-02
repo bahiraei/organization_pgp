@@ -4,18 +4,21 @@ import 'package:organization_pgp/features/home/data/model/home_data_model.dart';
 import 'package:organization_pgp/features/home/presentation/widget/tab_bar.dart';
 
 import '../../../../core/core.dart';
+import '../../../profile/data/model/profile_model.dart';
 import '../bloc/home_bloc.dart';
 
 class CustomAppBar extends StatefulWidget {
   final VoidCallback drawerTap;
   final ValueNotifier<int> tabIndexNotifier;
   final HomeData? homeData;
+  final ProfileData? profile;
 
   const CustomAppBar({
     super.key,
     required this.drawerTap,
     required this.tabIndexNotifier,
     required this.homeData,
+    required this.profile,
   });
 
   @override
@@ -117,12 +120,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     isShowLine: widget.tabIndexNotifier.value == 1,
                     onTap: () => widget.tabIndexNotifier.value = 1,
                   ),
-                  CustomTabBar(
-                    title: 'مانیتورینگ 360',
-                    isShowLine: widget.tabIndexNotifier.value == 2,
-                    onTap: () => widget.tabIndexNotifier.value = 2,
-                    icon: Icons.star,
-                  ),
+                  if (widget.profile?.isAdmin ?? false)
+                    CustomTabBar(
+                      title: 'مانیتورینگ 360',
+                      isShowLine: widget.tabIndexNotifier.value == 2,
+                      onTap: () => widget.tabIndexNotifier.value = 2,
+                      icon: Icons.star,
+                    ),
                 ],
               ),
             );
