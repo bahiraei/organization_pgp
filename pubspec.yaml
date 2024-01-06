@@ -36,7 +36,7 @@ dependencies:
   connectivity_plus: ^5.0.2
   internet_connection_checker: ^1.0.0+1
   carousel_slider: ^4.2.1
-  cached_network_image: ^3.3.0
+  cached_network_image: ^3.3.1
   pinch_zoom_image_last: ^0.4.1
   easy_image_viewer: ^1.3.2
   url_launcher: ^6.2.2
@@ -55,15 +55,15 @@ dependencies:
   persian_datetime_picker: ^2.6.0
   persian_linear_date_picker: ^0.0.2
   flutter_adaptive_ui: ^0.8.0+1
-  syncfusion_flutter_pdfviewer: ^24.1.43
+  syncfusion_flutter_pdfviewer: ^24.1.44
   dotted_border: ^2.1.0
   dropdown_button2: ^2.3.9
   loading_animation_widget: ^1.2.0+4
   toastification: ^1.1.0
   gap: ^3.0.1
   dotted_dashed_line: ^0.0.3
-  image_picker: ^1.0.5
-  firebase_messaging: ^14.7.9
+  image_picker: ^1.0.6
+  firebase_messaging: ^14.7.10
   flutter_local_notifications: ^16.3.0
   firebase_core: ^2.24.2
   open_filez: ^4.1.5
