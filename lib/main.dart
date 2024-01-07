@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:organization_pgp/features/features.dart';
 
 import 'core/core.dart';
 import 'core/service/firebase_messaging.dart';
-import 'features/splash/presentation/splash.dart';
 
 const isrgRootX1 = '''-----BEGIN CERTIFICATE-----
 MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw

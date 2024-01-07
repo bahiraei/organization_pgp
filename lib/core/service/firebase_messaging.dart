@@ -11,7 +11,7 @@ class FirebaseMessagingService {
       final fcmToken = await FirebaseMessaging.instance
           .getToken(
         vapidKey:
-            'BBHCuZVQxMjFjB6VXueRDO_xOxyXfKNFnPkG3-nIwNH6RIPc8ilDMKPpZ_Mul1_U3eEyLtF_qzxqWU9EcBRh3C4 ',
+            'BBHCuZVQxMjFjB6VXueRDO_xOxyXfKNFnPkG3-nIwNH6RIPc8ilDMKPpZ_Mul1_U3eEyLtF_qzxqWU9EcBRh3C4',
       )
           .timeout(
         const Duration(seconds: 45),
