@@ -105,7 +105,8 @@ flutter:
     - assets/images/profile/
     - assets/images/calendar/
     - assets/images/meeting/
-    - assets/images/feedback/
+    - assets/images/feedback/-+
+    -
 
 
   fonts:
