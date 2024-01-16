@@ -18,21 +18,12 @@ class Helper {
   }
 
   static showSnackBar(String message, BuildContext context) {
-    /*ScaffoldMessenger.of(context).removeCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-        ),
-      ),
-    );*/
-
     toastification.show(
       context: context,
       type: ToastificationType.info,
       style: ToastificationStyle.minimal,
-      title: 'پیام!',
-      description: message,
+      title: const Text('پیام!'),
+      description: Text(message),
       alignment: Alignment.topRight,
       autoCloseDuration: const Duration(seconds: 4),
       animationBuilder: (
@@ -63,8 +54,8 @@ class Helper {
       context: context,
       type: type ?? ToastificationType.info,
       style: ToastificationStyle.minimal,
-      title: title,
-      description: description,
+      title: Text(title),
+      description: Text(description),
       alignment: Alignment.topRight,
       autoCloseDuration: const Duration(seconds: 4),
       animationBuilder: (

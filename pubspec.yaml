@@ -59,7 +59,7 @@ dependencies:
   dotted_border: ^2.1.0
   dropdown_button2: ^2.3.9
   loading_animation_widget: ^1.2.0+4
-  toastification: ^1.1.0
+  toastification: ^1.2.0
   gap: ^3.0.1
   dotted_dashed_line: ^0.0.3
   image_picker: ^1.0.7
@@ -71,6 +71,8 @@ dependencies:
     git:
       url: https://github.com/bahiraei/pdfx.git
       ref: main
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
 
 
 
@@ -80,6 +82,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.1
+  build_runner: ^2.4.8
+  freezed: ^2.4.6
+  json_serializable: ^6.7.1
   flutter_launcher_icons: ^0.13.1
 #  flutter_app_name: ^0.1.1
 
