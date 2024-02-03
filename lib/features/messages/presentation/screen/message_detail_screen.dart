@@ -7,12 +7,12 @@ import 'package:gap/gap.dart';
 import '../../../../core/core.dart';
 import '../../../audio_player/audio_player_screen.dart';
 import '../../../audio_player/domain/params/audio_player_params.dart';
+import '../../../video/video_player_screen.dart';
 import '../../data/model/comment_model.dart';
 import '../../data/model/message_model.dart';
 import '../../data/repository/message_repository.dart';
 import '../bloc/message_bloc.dart';
 import 'bottom_sheet/register_comment_bottom_sheet.dart';
-import 'video_play_screen.dart';
 
 class MessageDetailScreenParams {
   final MessageEntity multimediaEntity;
