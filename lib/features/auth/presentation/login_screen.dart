@@ -5,17 +5,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:organization_pgp/core/core.dart';
-import 'package:organization_pgp/features/auth/presentation/dialog/policy_dialog.dart';
-import 'package:organization_pgp/features/auth/presentation/verify_screen.dart';
-import 'package:organization_pgp/features/home/data/repository/home_repository.dart';
 import 'package:persian_utils/persian_utils.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../../../core/consts/app_images.dart';
+import '../../../core/utils/app_info.dart';
+import '../../../core/utils/helper.dart';
+import '../../../core/utils/routes.dart';
+import '../../../core/widgets/app_text_field.dart';
+import '../../home/data/repository/home_repository.dart';
 import '../../profile/data/repository/profile_repository.dart';
 import '../data/repository/auth_repository.dart';
 import 'bloc/auth_bloc.dart';
+import 'dialog/policy_dialog.dart';
 import 'dialog/pwe_install_dialog.dart';
+import 'verify_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final LoginScreenParams? screenParams;
@@ -362,13 +366,12 @@ class _LoginSubScreenState extends State<LoginSubScreen> {
                                                       : Colors.blue,
                                                 ),
                                                 child: state is AuthLoading
-                                                    ? const CupertinoActivityIndicator(
-                                                        color: Colors.white,
-                                                      )
+                                                    ? const CupertinoActivityIndicator()
                                                     : const Text(
                                                         'ورود',
                                                         style: TextStyle(
                                                           fontSize: 16,
+                                                          color: Colors.white,
                                                         ),
                                                       ),
                                               ),

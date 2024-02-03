@@ -31,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final screenSize = Screen.fromContext(context).screenSize;
-    double mainMarginPercent = 1.0;
+    double mainMarginPercent = 0;
     if (screenSize == ScreenSize.xsmall) {
       mainMarginPercent = 0.0;
     } else if (screenSize == ScreenSize.small) {
@@ -115,20 +115,169 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPressed: isSigningOut
                                     ? null
                                     : () async {
-                                        setState(() {
-                                          isSigningOut = true;
-                                        });
-                                        await authRepository.signOut().then(
-                                              (value) => Navigator
-                                                  .pushReplacementNamed(
-                                                context,
-                                                Routes.splash,
+                                        final result = await showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return Dialog(
+                                              insetPadding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 0,
+                                                vertical: 0,
+                                              ),
+                                              shape: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(24),
+                                              ),
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.41,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.85,
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        24, 24, 24, 24),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(24),
+                                                  color: Theme.of(context)
+                                                      .cardColor,
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Column(
+                                                        children: [
+                                                          const Gap(24),
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(12),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Colors
+                                                                  .red.shade100,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          100),
+                                                            ),
+                                                            child: Icon(
+                                                              Icons.exit_to_app,
+                                                              color: Colors
+                                                                  .red.shade400,
+                                                              size: 36,
+                                                            ),
+                                                          ),
+                                                          const Gap(12),
+                                                          const Text(
+                                                            'آیا از خروج از حساب اطمینان دارید؟',
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 120,
+                                                          height: 44,
+                                                          child: ElevatedButton(
+                                                            style:
+                                                                ElevatedButton
+                                                                    .styleFrom(
+                                                              backgroundColor:
+                                                                  Colors.red,
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12),
+                                                                side: BorderSide
+                                                                    .none,
+                                                              ),
+                                                            ),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(true);
+                                                            },
+                                                            child: const Text(
+                                                              'خروج',
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 120,
+                                                          height: 44,
+                                                          child: ElevatedButton(
+                                                            style:
+                                                                ElevatedButton
+                                                                    .styleFrom(
+                                                              backgroundColor:
+                                                                  const Color(
+                                                                      0xffececec),
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                side: BorderSide
+                                                                    .none,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12),
+                                                              ),
+                                                            ),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(false);
+                                                            },
+                                                            child: const Text(
+                                                              'انصراف',
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black87,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             );
+                                          },
+                                        );
 
-                                        setState(() {
-                                          isSigningOut = false;
-                                        });
+                                        if (mounted) {
+                                          if (result) {
+                                            await authRepository.signOut().then(
+                                                  (value) => Navigator
+                                                      .pushReplacementNamed(
+                                                    context,
+                                                    Routes.splash,
+                                                  ),
+                                                );
+                                          }
+                                        }
                                       },
                                 child: isSigningOut
                                     ? const SizedBox(
@@ -400,52 +549,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             ),
                           ),
-                          /* const Gap(32),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 48),
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(12),
-                              onTap: () {
-                                */ /*Navigator.of(context).pushNamed(
-                                  Routes.dependants,
-                                );*/ /*
-                              },
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(16, 12, 16, 12),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: Colors.white,
-                                  boxShadow: AppColor.shadow1,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      'افراد تحت تکفل',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Chip(
-                                      backgroundColor: Colors.green,
-                                      label: Text(
-                                        (state.profile.data?.dependencies
-                                                    ?.length ??
-                                                0)
-                                            .toString(),
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),*/
                         ],
                       ),
                     ),

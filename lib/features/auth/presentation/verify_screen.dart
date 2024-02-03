@@ -5,18 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:organization_pgp/core/core.dart';
-import 'package:organization_pgp/features/auth/presentation/login_screen.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
 import "package:universal_html/html.dart" as html;
 
+import '../../../core/consts/app_images.dart';
+import '../../../core/utils/app_info.dart';
+import '../../../core/utils/helper.dart';
+import '../../../core/utils/routes.dart';
+import '../../../core/widgets/app_button.dart';
 import '../../home/data/repository/home_repository.dart';
 import '../../home/presentation/home_screen.dart';
 import '../../home/presentation/widget/dialog/pwa_update_alarm_sheet.dart';
 import '../../profile/data/repository/profile_repository.dart';
 import '../data/repository/auth_repository.dart';
 import 'bloc/auth_bloc.dart';
+import 'login_screen.dart';
 
 class VerifyScreen extends StatelessWidget {
   final VerifyScreenParams screenParams;
@@ -95,7 +99,7 @@ class VerifySubScreen extends StatefulWidget {
 
 class _VerifySubScreenState extends State<VerifySubScreen> {
   final verifyCodeController = TextEditingController();
-  final enabledVerify = ValueNotifier<bool>(true);
+  final disableButton = ValueNotifier<bool>(true);
   final timerNotifier = ValueNotifier<int>(0);
   late Timer timer;
 
@@ -150,6 +154,7 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
             multiLine: true,
           ),
         );
+        disableButton.value = true;
         BlocProvider.of<AuthBloc>(context).add(
           AuthVerifyStarted(
             nationalCode: widget.screenParams.nationalCode,
@@ -179,6 +184,7 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthError) {
+            disableButton.value = false;
             Helper.showSnackBar(state.exception.message.toString(), context);
           } else if (state is AuthVerifyNeedUpdate) {
             Helper.log('need Update state!');
@@ -341,9 +347,9 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                                         defaultPinTheme: defaultPinTheme,
                                         onChanged: (value) {
                                           if (value.length == 4) {
-                                            enabledVerify.value = false;
+                                            disableButton.value = false;
                                           } else {
-                                            enabledVerify.value = true;
+                                            disableButton.value = true;
                                           }
                                         },
                                         onCompleted: (value) {},
@@ -353,6 +359,7 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                                             return;
                                           }
 
+                                          disableButton.value = true;
                                           BlocProvider.of<AuthBloc>(context)
                                               .add(
                                             AuthVerifyStarted(
@@ -368,8 +375,8 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                                   ),
                                   const SizedBox(height: 48),
                                   ValueListenableBuilder<bool>(
-                                    valueListenable: enabledVerify,
-                                    builder: (context, value, _) {
+                                    valueListenable: disableButton,
+                                    builder: (context, isDisabled, _) {
                                       return Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -393,7 +400,7 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                                                   }
                                                 : () {},
                                             isLoading: state is AuthLoading,
-                                            isDisable: value,
+                                            isDisable: isDisabled,
                                             color: Colors.blue,
                                             height: 54,
                                             text: 'ورود',
