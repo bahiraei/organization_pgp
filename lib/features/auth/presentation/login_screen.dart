@@ -141,7 +141,7 @@ class _LoginSubScreenState extends State<LoginSubScreen> {
             child: Column(
               children: [
                 Container(
-                  height: size.height + keyboardSize + 400,
+                  height: size.height + keyboardSize - 26,
                   decoration: const BoxDecoration(
                     color: Color(0xff00c4ff),
                   ),
@@ -185,7 +185,7 @@ class _LoginSubScreenState extends State<LoginSubScreen> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 220),
-                        height: size.height * 0.8 + keyboardSize + 400,
+                        /* height: size.height * 0.8 + keyboardSize + 400,*/
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(

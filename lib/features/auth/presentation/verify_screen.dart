@@ -242,29 +242,13 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    height: size.height + keyboardSize + 400,
+                    height: size.height + keyboardSize - 26,
                     decoration: const BoxDecoration(
                       color: Color(0xff00c4ff),
                     ),
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: [
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          right: 0,
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: 250,
-                            child: Opacity(
-                              opacity: 0.9,
-                              child: Image.asset(
-                                AppImages.loginBG,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
                         Positioned(
                           left: 16,
                           top: 0,
@@ -286,7 +270,7 @@ class _VerifySubScreenState extends State<VerifySubScreen> {
                         ),
                         Container(
                           margin: const EdgeInsets.only(top: 220),
-                          height: size.height * 0.8 + keyboardSize + 400,
+                          /*height: size.height * 0.8 + keyboardSize + 400,*/
                           decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
