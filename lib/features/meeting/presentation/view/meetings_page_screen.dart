@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:organization_pgp/core/widgets/empty_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/consts/app_colors.dart';
@@ -135,18 +136,7 @@ class _MeetingsPageScreenState extends State<MeetingsPageScreen> {
                 );
               } else if (state is MeetingEmpty) {
                 return const Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'اطلاعاتی یافت نشد',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: EmptyView(),
                 );
               } else if (state is MeetingError) {
                 return Expanded(

@@ -10,6 +10,7 @@ import '../../../core/utils/helper.dart';
 import '../../../core/utils/routes.dart';
 import '../../../core/widgets/app_bg.dart';
 import '../../../core/widgets/custom_button.dart';
+import '../../../core/widgets/empty_view.dart';
 import '../../../core/widgets/title_bar.dart';
 import '../data/repository/phone_repository.dart';
 import 'bloc/phone_bloc.dart';
@@ -260,19 +261,8 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                           } else if (state is PhoneInitial) {
                             return const SizedBox();
                           } else if (state is PhoneEmpty) {
-                            return const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'اطلاعاتی یافت نشد',
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            return const Expanded(
+                              child: EmptyView(),
                             );
                           } else if (state is PhoneError) {
                             return Center(

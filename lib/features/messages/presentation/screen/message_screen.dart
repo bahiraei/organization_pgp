@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:organization_pgp/core/widgets/empty_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../core/core.dart';
@@ -147,14 +148,8 @@ class _MessageScreenState extends State<MessageScreen> {
                                     ),
                                   );
                                 } else if (state is MessageEmpty) {
-                                  return const Center(
-                                    child: Text(
-                                      'اطلاعاتی یافت نشد',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
+                                  return const Expanded(
+                                    child: EmptyView(),
                                   );
                                 } else if (state is MessageError) {
                                   return Center(

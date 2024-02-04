@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:organization_pgp/core/widgets/empty_view.dart';
 import 'package:organization_pgp/features/secondary_pdf/secondary_pdf_screen.dart';
 
 import '../../../core/utils/helper.dart';
@@ -235,18 +236,8 @@ class _FishScreenState extends State<FishScreen> {
                                 );
                               } else if (state is FishEmpty) {
                                 return const Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'فیش مورد نظر یافت نشد.',
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black45,
-                                        ),
-                                      ),
-                                    ],
+                                  child: EmptyView(
+                                    title: 'فیش مورد نظر یافت نشد.',
                                   ),
                                 );
                               } else {
@@ -262,45 +253,6 @@ class _FishScreenState extends State<FishScreen> {
               ],
             ),
           ),
-          /*floatingActionButton: BlocBuilder<FishBloc, FishState>(
-            builder: (context, state) {
-              if (state is FishSuccess) {
-                return FloatingActionButton(
-                  onPressed: () async {
-                    if (kIsWeb) {
-                      FileManagerHandler.saveFileInWeb(
-                        state.file,
-                        'fish-${state.year}-${state.month}.pdf',
-                      );
-                    } else {
-                      final status =
-                          await PermissionHandler.getStoragePermission();
-
-                      if (status != PermissionStatus.granted) {
-                        return;
-                      }
-                      final file = await FileManagerHandler.saveFile(
-                        name: 'fish-${state.year}-${state.month}.pdf',
-                        data: state.file,
-                      );
-                      if (mounted && file != null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'فایل با موفقیت ذخیره شد',
-                            ),
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  child: const Icon(Icons.download),
-                );
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),*/
         ),
       ),
     );

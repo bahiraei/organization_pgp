@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:organization_pgp/core/widgets/empty_view.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 import '../../../core/consts/app_colors.dart';
@@ -209,25 +210,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   );
                 } else if (state is DigitalCalendarEmpty) {
                   return const Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.list,
-                          color: Colors.black38,
-                          size: 78,
-                        ),
-                        Gap(8),
-                        Text(
-                          'رویدادی یافت نشد',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: EmptyView(),
                   );
                 }
 

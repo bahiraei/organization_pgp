@@ -10,6 +10,7 @@ import '../../../../core/widgets/app_bg.dart';
 import '../../../../core/widgets/bottom_loader.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/empty_bottom_loader.dart';
+import '../../../../core/widgets/empty_view.dart';
 import '../../../../core/widgets/title_bar.dart';
 import '../../../profile/data/model/profile_model.dart';
 import '../../data/model/admin_feedback.dart';
@@ -124,14 +125,8 @@ class _FeedbackAdminViewState extends State<FeedbackAdminView> {
                             ),
                           );
                         } else if (state is FeedbackEmpty) {
-                          return const Center(
-                            child: Text(
-                              'اطلاعاتی یافت نشد',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
+                          return const Expanded(
+                            child: EmptyView(),
                           );
                         } else if (state is FeedbackError) {
                           return Center(
