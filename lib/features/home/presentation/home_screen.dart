@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             if (_refreshController.isRefresh) {
               if (state is HomeSuccess) {
                 _refreshController.refreshCompleted();
-              } else if (state is HomeError) {
+              } else if (state is HomeError || state is HomeDialogError) {
                 _refreshController.refreshFailed();
               }
             }

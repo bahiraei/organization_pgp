@@ -5,6 +5,7 @@ import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:organization_pgp/core/widgets/error_view.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 import '../../../../core/core.dart';
@@ -125,45 +126,13 @@ class _AdminMessageScreenState extends State<AdminMessageScreen> {
                               ),
                             );
                           } else if (state is CreateMessageError) {
-                            return Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    state.exception.message ??
-                                        'خطایی رخ داده است',
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 44),
-                                  SizedBox(
-                                    width: null,
-                                    child: CustomButton(
-                                      width: 120,
-                                      height: 44,
-                                      backgroundColor: Colors.red,
-                                      showShadow: false,
-                                      borderRadius: 20,
-                                      onPressed: () {
-                                        BlocProvider.of<MessageBloc>(context)
-                                            .add(
-                                          CreateMessageStarted(),
-                                        );
-                                      },
-                                      child: const Text(
-                                        'تلاش مجدد',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            return ErrorView(
+                              message: state.exception.message,
+                              onRetry: () {
+                                BlocProvider.of<MessageBloc>(context).add(
+                                  CreateMessageStarted(),
+                                );
+                              },
                             );
                           } else if (state is CreateMessageSuccess) {
                             return SingleChildScrollView(

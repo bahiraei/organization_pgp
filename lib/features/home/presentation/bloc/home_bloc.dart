@@ -96,7 +96,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               );
             });
           } else {
-            emit(HomeDialogError(exception: exception));
+            emit(HomeError(exception: exception));
           }
         }
       }

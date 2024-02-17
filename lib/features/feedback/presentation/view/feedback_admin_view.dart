@@ -11,6 +11,7 @@ import '../../../../core/widgets/bottom_loader.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/empty_bottom_loader.dart';
 import '../../../../core/widgets/empty_view.dart';
+import '../../../../core/widgets/error_view.dart';
 import '../../../../core/widgets/title_bar.dart';
 import '../../../profile/data/model/profile_model.dart';
 import '../../data/model/admin_feedback.dart';
@@ -129,47 +130,15 @@ class _FeedbackAdminViewState extends State<FeedbackAdminView> {
                             child: EmptyView(),
                           );
                         } else if (state is FeedbackError) {
-                          return Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  state.exception.message ??
-                                      'خطایی رخ داده است',
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                          return ErrorView(
+                            message: state.exception.message,
+                            onRetry: () {
+                              BlocProvider.of<FeedbackBloc>(context).add(
+                                const FeedbackAdminStarted(
+                                  isScrolling: false,
                                 ),
-                                const SizedBox(height: 44),
-                                SizedBox(
-                                  width: null,
-                                  child: CustomButton(
-                                    width: 120,
-                                    height: 44,
-                                    backgroundColor: Colors.red,
-                                    showShadow: false,
-                                    borderRadius: 20,
-                                    onPressed: () {
-                                      BlocProvider.of<FeedbackBloc>(context)
-                                          .add(
-                                        const FeedbackAdminStarted(
-                                          isScrolling: false,
-                                        ),
-                                      );
-                                    },
-                                    child: const Text(
-                                      'تلاش مجدد',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              );
+                            },
                           );
                         } else if (state is FeedbackAdminSuccess) {
                           return ListView.builder(
