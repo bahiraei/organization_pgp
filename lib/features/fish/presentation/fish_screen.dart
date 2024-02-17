@@ -225,7 +225,7 @@ class _FishScreenState extends State<FishScreen> {
                                   style: const TextStyle(
                                     color: Colors.black45,
                                     fontSize: 24,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                   onRetry: () {},
                                 );

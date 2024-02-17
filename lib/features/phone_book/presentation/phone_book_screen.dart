@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/utils/helper.dart';
 import '../../../core/utils/routes.dart';
 import '../../../core/widgets/app_bg.dart';
-import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/empty_view.dart';
+import '../../../core/widgets/error_view.dart';
 import '../../../core/widgets/title_bar.dart';
 import '../data/repository/phone_repository.dart';
 import 'bloc/phone_bloc.dart';
@@ -247,15 +248,10 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
 
                           if (state is PhoneLoading) {
                             return const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 32,
-                                    width: 32,
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                ],
+                              child: SizedBox(
+                                height: 32,
+                                width: 32,
+                                child: CircularProgressIndicator(),
                               ),
                             );
                           } else if (state is PhoneInitial) {
@@ -265,47 +261,16 @@ class _PhoneBookSubScreenState extends State<PhoneBookSubScreen> {
                               child: EmptyView(),
                             );
                           } else if (state is PhoneError) {
-                            return Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    state.exception.message ??
-                                        'خطایی رخ داده است',
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                            return ErrorView(
+                              onRetry: () {
+                                BlocProvider.of<PhoneBloc>(context).add(
+                                  const PhoneStarted(
+                                    isRefreshing: false,
+                                    searchTag: null,
                                   ),
-                                  const SizedBox(height: 44),
-                                  SizedBox(
-                                    width: null,
-                                    child: CustomButton(
-                                      width: 120,
-                                      height: 44,
-                                      backgroundColor: Colors.red,
-                                      showShadow: false,
-                                      borderRadius: 20,
-                                      onPressed: () {
-                                        BlocProvider.of<PhoneBloc>(context).add(
-                                          const PhoneStarted(
-                                            isRefreshing: false,
-                                            searchTag: null,
-                                          ),
-                                        );
-                                      },
-                                      child: const Text(
-                                        'تلاش مجدد',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                );
+                              },
+                              message: state.exception.message,
                             );
                           } else if (state is PhoneSuccess) {
                             return Expanded(
