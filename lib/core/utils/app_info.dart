@@ -10,5 +10,5 @@ class AppInfo {
     allowToLogin: true,
     currentVersion: 0,
   );
-  static const int appVersionForCheckUpdate = 13;
+  static const int appVersionForCheckUpdate = 14;
 }
