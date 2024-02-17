@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDFRIO3sqJzglgF8XEwIJGdVPlsndx30H0',
+  apiKey: 'AIzaSyDFRIO3sqJzglgF8XEwIJGdVPlsndx30H0',
     appId: '1:487002396898:web:7a7ed818d86c5deb2ba6bb',
     messagingSenderId: '487002396898',
     projectId: 'hedayatpgp',
