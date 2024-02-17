@@ -10,7 +10,6 @@ import 'package:organization_pgp/features/home/data/model/slider_model.dart';
 import 'package:organization_pgp/features/home/data/repository/home_repository.dart';
 import 'package:organization_pgp/features/profile/data/repository/profile_repository.dart';
 
-import '../../../../core/utils/routes.dart';
 import '../../../auth/data/repository/auth_repository.dart';
 import '../../../profile/data/model/profile_model.dart';
 
@@ -31,12 +30,19 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }) : super(SplashInitial()) {
     on<SplashEvent>((event, emit) async {
       if (event is SplashStarted) {
+        final stopWatch = Stopwatch();
         try {
+          stopWatch.start();
           emit(SplashLoading());
 
           final connectivityResult = await (Connectivity().checkConnectivity());
 
           if (connectivityResult == ConnectivityResult.none) {
+            stopWatch.stop();
+            if (stopWatch.elapsed.inSeconds < 4) {
+              await Future.delayed(
+                  Duration(seconds: 4 - stopWatch.elapsed.inSeconds));
+            }
             emit(
               SplashError(
                 exception: SocketException(
@@ -54,6 +60,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
             final sliderData = await homeRepository.getSlider();
             final profileData = await profileRepository.getProfile();
 
+            stopWatch.stop();
+            if (stopWatch.elapsed.inSeconds < 4) {
+              await Future.delayed(
+                  Duration(seconds: 4 - stopWatch.elapsed.inSeconds));
+            }
             emit(
               SplashSuccess(
                 homeData: homeData,
@@ -62,6 +73,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               ),
             );
           } else {
+            stopWatch.stop();
+            if (stopWatch.elapsed.inSeconds < 4) {
+              await Future.delayed(
+                  Duration(seconds: 4 - stopWatch.elapsed.inSeconds));
+            }
             emit(
               SplashError(
                 exception: UnauthorizedException(),
@@ -70,16 +86,14 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           }
         } catch (e) {
           final exception = await ExceptionHandler.handleDioError(e);
-          if (exception is UnauthorizedException) {
-            await authRepository.signOut().then((value) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                Routes.splash,
-                (route) => false,
-              );
-            });
-          } else {
-            emit(SplashError(exception: exception));
+          stopWatch.stop();
+          if (stopWatch.elapsed.inSeconds < 4) {
+            await Future.delayed(
+                Duration(seconds: 4 - stopWatch.elapsed.inSeconds));
           }
+          emit(SplashError(
+            exception: exception,
+          ));
         }
       }
     });

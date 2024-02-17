@@ -108,7 +108,7 @@ class _SplashScreenState extends State<SplashScreen>
           } else if (state is SplashError) {
             if (state.exception is UnauthorizedException) {
               await authRepository.signOut().then(
-                (value) {
+                (value) async {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     Routes.login,
                     (route) => false,
