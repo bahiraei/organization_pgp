@@ -3,6 +3,7 @@ import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:organization_pgp/core/widgets/empty_view.dart';
+import 'package:organization_pgp/core/widgets/error_view.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 import '../../../core/consts/app_colors.dart';
@@ -111,43 +112,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     ),
                   );
                 } else if (state is DigitalCalendarError) {
-                  return Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          state.exception.message ?? 'خطایی رخ داده است',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(height: 44),
-                        SizedBox(
-                          width: null,
-                          child: CustomButton(
-                            width: 120,
-                            height: 44,
-                            backgroundColor: Colors.red,
-                            showShadow: false,
-                            borderRadius: 20,
-                            onPressed: () {
-                              BlocProvider.of<DigitalCalendarBloc>(context).add(
-                                DigitalCalendarStarted(),
-                              );
-                            },
-                            child: const Text(
-                              'تلاش مجدد',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  return ErrorView(
+                    message: state.exception.message,
+                    onRetry: () {
+                      BlocProvider.of<DigitalCalendarBloc>(context).add(
+                        DigitalCalendarStarted(),
+                      );
+                    },
                   );
                 } else if (state is DigitalCalendarSuccess) {
                   final List<dynamic> listItems = [
