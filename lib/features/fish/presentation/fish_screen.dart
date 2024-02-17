@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:organization_pgp/core/widgets/empty_view.dart';
+import 'package:organization_pgp/core/widgets/error_view.dart';
 import 'package:organization_pgp/features/secondary_pdf/secondary_pdf_screen.dart';
 
 import '../../../core/utils/helper.dart';
@@ -218,21 +219,15 @@ class _FishScreenState extends State<FishScreen> {
                             builder: (context, state) {
                               Helper.log(state.toString());
                               if (state is FishError) {
-                                return Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        state.exception.message ??
-                                            'خطایی رخ داده است',
-                                        style: const TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black45,
-                                        ),
-                                      ),
-                                    ],
+                                return ErrorView(
+                                  message: state.exception.message,
+                                  canRetry: false,
+                                  style: const TextStyle(
+                                    color: Colors.black45,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w500,
                                   ),
+                                  onRetry: () {},
                                 );
                               } else if (state is FishEmpty) {
                                 return const Expanded(
