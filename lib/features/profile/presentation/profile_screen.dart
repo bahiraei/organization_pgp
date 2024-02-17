@@ -3,6 +3,7 @@ import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:organization_pgp/core/widgets/error_view.dart';
 
 import '../../../core/consts/app_environment.dart';
 import '../../../core/utils/helper.dart';
@@ -641,43 +642,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                   ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          state.exception.message ?? 'خطایی رخ داده است',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(height: 44),
-                        SizedBox(
-                          width: null,
-                          child: CustomButton(
-                            width: 120,
-                            height: 44,
-                            backgroundColor: Colors.red,
-                            showShadow: false,
-                            borderRadius: 20,
-                            onPressed: () {
-                              BlocProvider.of<ProfileBloc>(context).add(
-                                const ProfileStarted(),
-                              );
-                            },
-                            child: const Text(
-                              'تلاش مجدد',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  ErrorView(
+                    message: state.exception.message,
+                    onRetry: () {
+                      BlocProvider.of<ProfileBloc>(context).add(
+                        const ProfileStarted(),
+                      );
+                    },
                   ),
                 ],
               );
