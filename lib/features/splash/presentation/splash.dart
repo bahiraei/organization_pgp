@@ -153,117 +153,120 @@ class _SplashScreenState extends State<SplashScreen>
                 right: 0,
                 top: 0,
                 bottom: 0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/splash/splashLogo.png',
-                          width: 140,
-                          height: 140,
-                        ),
-                      ],
-                    ).animate().scale(delay: 700.ms).fadeIn(),
-                    const Gap(8),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'هدایت کشتی خلیج فارس',
-                          style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.white,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/splash/splashLogo.png',
+                            width: 140,
+                            height: 140,
                           ),
-                        ),
-                      ],
-                    ).animate().slideY(delay: 1200.ms).fadeIn(),
-                    const Gap(8),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'اپلیکیشن سازمانی',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
+                        ],
+                      ).animate().scale(delay: 700.ms).fadeIn(),
+                      const Gap(8),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'هدایت کشتی خلیج فارس',
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ],
-                    ).animate().slideY(delay: 1700.ms).fadeIn(),
-                    const Gap(8),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Future Per Network:AI',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
+                        ],
+                      ).animate().slideY(delay: 1200.ms).fadeIn(),
+                      const Gap(8),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'اپلیکیشن سازمانی',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ],
-                    ).animate().slideY(delay: 2200.ms).fadeIn(),
-                    const Gap(32),
-                    BlocBuilder<SplashBloc, SplashState>(
-                      builder: (context, state) {
-                        if (state is SplashLoading || state is SplashInitial) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            child:
-                                CircularProgressIndicator(color: Colors.white),
-                          );
-                        } else if (state is SplashError &&
-                            state.exception.message != null) {
-                          return Column(
-                            children: [
-                              Text(
-                                state.exception.message.toString(),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 24),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Builder(
-                                    builder: (context) {
-                                      return CustomButton(
-                                        onPressed: () {
-                                          BlocProvider.of<SplashBloc>(context)
-                                              .add(
-                                            SplashStarted(),
-                                          );
-                                        },
-                                        borderRadius: 18,
-                                        width: 86,
-                                        height: 36,
-                                        showShadow: false,
-                                        backgroundColor: Colors.red,
-                                        child: const Text(
-                                          'تلاش مجدد',
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      );
-                                    },
+                        ],
+                      ).animate().slideY(delay: 1700.ms).fadeIn(),
+                      const Gap(8),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Future Per Network:AI',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ).animate().slideY(delay: 2200.ms).fadeIn(),
+                      const Gap(32),
+                      BlocBuilder<SplashBloc, SplashState>(
+                        builder: (context, state) {
+                          if (state is SplashLoading ||
+                              state is SplashInitial) {
+                            return const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: CircularProgressIndicator(
+                                  color: Colors.white),
+                            );
+                          } else if (state is SplashError &&
+                              state.exception.message != null) {
+                            return Column(
+                              children: [
+                                Text(
+                                  state.exception.message.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.white,
                                   ),
-                                ],
-                              ),
-                              const SizedBox(height: 54),
-                            ],
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                    ),
-                  ],
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 24),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Builder(
+                                      builder: (context) {
+                                        return CustomButton(
+                                          onPressed: () {
+                                            BlocProvider.of<SplashBloc>(context)
+                                                .add(
+                                              SplashStarted(),
+                                            );
+                                          },
+                                          borderRadius: 18,
+                                          width: 86,
+                                          height: 36,
+                                          showShadow: false,
+                                          backgroundColor: Colors.red,
+                                          child: const Text(
+                                            'تلاش مجدد',
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 54),
+                              ],
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

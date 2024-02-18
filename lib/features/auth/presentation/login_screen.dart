@@ -141,7 +141,7 @@ class _LoginSubScreenState extends State<LoginSubScreen> {
             child: Column(
               children: [
                 Container(
-                  height: size.height + keyboardSize - 26,
+                  /* height: size.height + keyboardSize - 26,*/
                   decoration: const BoxDecoration(
                     color: Color(0xff00c4ff),
                   ),
@@ -185,7 +185,6 @@ class _LoginSubScreenState extends State<LoginSubScreen> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 220),
-                        /* height: size.height * 0.8 + keyboardSize + 400,*/
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -225,76 +224,81 @@ class _LoginSubScreenState extends State<LoginSubScreen> {
                                     ),
                                   ),
                                   const SizedBox(height: 30),
-                                  Builder(builder: (context) {
-                                    return AppTextFormField(
-                                      fillColor: const Color(0xff8FD5FF)
-                                          .withOpacity(0.47),
-                                      onTapOutside: (event) {},
-                                      textColor: Colors.blue,
-                                      enabledBorder: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      controller: nationalCodeController,
-                                      maxLength: 10,
-                                      validator: (value) {
-                                        if (value.isEmpty ||
-                                            value.length > 10) {
-                                          return "کد ملی را وارد کنید";
-                                        }
+                                  Builder(
+                                    builder: (context) {
+                                      return AppTextFormField(
+                                        fillColor: const Color(0xff8FD5FF)
+                                            .withOpacity(0.47),
+                                        onTapOutside: (event) {},
+                                        textColor: Colors.blue,
+                                        enabledBorder: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        controller: nationalCodeController,
+                                        maxLength: 10,
+                                        validator: (value) {
+                                          if (value.isEmpty ||
+                                              value.length > 10) {
+                                            return "کد ملی را وارد کنید";
+                                          }
 
-                                        return null;
-                                      },
-                                      keyboardType: TextInputType.phone,
-                                      hint: 'کد ملی',
-                                      hintText: "کد ملی را وارد کنید",
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
-                                      ],
-                                      suffixIcon: ValueListenableBuilder<bool>(
-                                        valueListenable: showClearButton,
-                                        builder: (context, value, _) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              nationalCodeController.clear();
-                                              showClearButton.value = false;
-                                              natCodeNotifier.value = true;
-                                            },
-                                            child: value
-                                                ? Container(
-                                                    margin:
-                                                        const EdgeInsets.all(
-                                                            12),
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: Colors.grey[800],
-                                                    ),
-                                                    child: const Icon(
-                                                      Icons.clear,
-                                                      color: Colors.white,
-                                                      size: 15,
-                                                    ),
-                                                  )
-                                                : const SizedBox(),
-                                          );
+                                          return null;
                                         },
-                                      ),
-                                      onChanged: (value) {
-                                        validateUsername(value: value);
-                                      },
-                                      autofocus: false,
-                                      onFieldSubmitted: (value) {
-                                        if (!validateUsername(value: value)) {
-                                          return;
-                                        }
-                                        if (state is AuthLoading) {
-                                          return;
-                                        }
+                                        keyboardType: TextInputType.phone,
+                                        hint: 'کد ملی',
+                                        hintText: "کد ملی را وارد کنید",
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                        ],
+                                        suffixIcon:
+                                            ValueListenableBuilder<bool>(
+                                          valueListenable: showClearButton,
+                                          builder: (context, value, _) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                nationalCodeController.clear();
+                                                showClearButton.value = false;
+                                                natCodeNotifier.value = true;
+                                              },
+                                              child: value
+                                                  ? Container(
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                              12),
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: Colors.grey[800],
+                                                      ),
+                                                      child: const Icon(
+                                                        Icons.clear,
+                                                        color: Colors.white,
+                                                        size: 15,
+                                                      ),
+                                                    )
+                                                  : const SizedBox(),
+                                            );
+                                          },
+                                        ),
+                                        onChanged: (value) {
+                                          validateUsername(value: value);
+                                        },
+                                        autofocus: false,
+                                        onFieldSubmitted: (value) {
+                                          if (!validateUsername(value: value)) {
+                                            return;
+                                          }
+                                          if (state is AuthLoading) {
+                                            return;
+                                          }
 
-                                        if (formKey.currentState!.validate()) {
-                                          onLoginButtonClicked();
-                                        }
-                                      },
-                                    );
-                                  }),
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            onLoginButtonClicked();
+                                          }
+                                        },
+                                      );
+                                    },
+                                  ),
                                   const SizedBox(height: 30),
                                   Row(
                                     children: [
